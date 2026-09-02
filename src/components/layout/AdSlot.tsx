@@ -7,7 +7,7 @@ interface AdSlotProps {
   format?: '728x90' | '300x250' | 'native';
 }
 
-export function AdSlot({ slot, className = '', size = 'md', format = '728x90' }: AdSlotProps) {
+export function AdSlot({ slot, className = '', format = '728x90' }: AdSlotProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
