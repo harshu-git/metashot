@@ -4,23 +4,39 @@ interface AdSlotProps {
   slot: string;
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'banner';
-  format?: '728x90' | '300x250' | 'native';
+  format?: '728x90' | '160x300';
 }
 
-export function AdSlot({ slot, className = '', format = '728x90' }: AdSlotProps) {
+export function AdSlot({ slot, className = '', format }: AdSlotProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // If format is not explicitly passed, alternate based on slot name
+  const activeFormat: '728x90' | '160x300' = format || (slot.includes('bottom') || slot.includes('2') ? '160x300' : '728x90');
+
+  const adConfig = activeFormat === '728x90' 
+    ? {
+        key: '44b5f1ef0534d69302a90ee2da766910',
+        height: 90,
+        width: 728,
+        maxWidth: '728px',
+      }
+    : {
+        key: '9e374bd0a7f8d76f2bd8f1236483cd4b',
+        height: 300,
+        width: 160,
+        maxWidth: '160px',
+      };
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    // Clear any previous ad elements on route change / remount
     container.innerHTML = '';
 
     const adIframe = document.createElement('iframe');
     adIframe.style.width = '100%';
-    adIframe.style.height = format === '728x90' ? '90px' : '250px';
-    adIframe.style.maxWidth = format === '728x90' ? '728px' : '300px';
+    adIframe.style.height = `${adConfig.height}px`;
+    adIframe.style.maxWidth = adConfig.maxWidth;
     adIframe.style.border = 'none';
     adIframe.style.overflow = 'hidden';
     adIframe.scrolling = 'no';
@@ -36,28 +52,27 @@ export function AdSlot({ slot, className = '', format = '728x90' }: AdSlotProps)
         <body>
           <script type="text/javascript">
             atOptions = {
-              'key' : '44b5f1ef0534d69302a90ee2da766910',
+              'key' : '${adConfig.key}',
               'format' : 'iframe',
-              'height' : 90,
-              'width' : 728,
+              'height' : ${adConfig.height},
+              'width' : ${adConfig.width},
               'params' : {}
             };
           </script>
-          <script type="text/javascript" src="//www.highrevenueformat.com/44b5f1ef0534d69302a90ee2da766910/invoke.js"></script>
+          <script type="text/javascript" src="//www.highrevenueformat.com/${adConfig.key}/invoke.js"></script>
         </body>
       </html>
     `;
 
     container.appendChild(adIframe);
     
-    // Inject ad doc
     const doc = adIframe.contentWindow?.document || adIframe.contentDocument;
     if (doc) {
       doc.open();
       doc.write(adHtml);
       doc.close();
     }
-  }, [format]);
+  }, [activeFormat, adConfig.height, adConfig.key, adConfig.maxWidth, adConfig.width]);
 
   return (
     <div className={`w-full max-w-4xl mx-auto my-4 flex flex-col items-center justify-center overflow-hidden ${className}`}>
@@ -67,7 +82,8 @@ export function AdSlot({ slot, className = '', format = '728x90' }: AdSlotProps)
       <div
         ref={containerRef}
         data-ad-slot={slot}
-        className="w-full flex items-center justify-center min-h-[90px] bg-[#111]/30 rounded-lg overflow-hidden"
+        style={{ minHeight: `${adConfig.height}px` }}
+        className="w-full flex items-center justify-center bg-[#111]/30 rounded-lg overflow-hidden"
       />
     </div>
   );
