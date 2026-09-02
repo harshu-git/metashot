@@ -4,23 +4,30 @@ interface AdSlotProps {
   slot: string;
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'banner';
-  format?: '728x90' | '468x60' | '160x300';
+  format?: '728x90' | '468x60' | '320x50' | '160x300';
 }
 
 export function AdSlot({ slot, className = '', format }: AdSlotProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Auto-distribute ad formats across different slots
-  const getFormat = (): '728x90' | '468x60' | '160x300' => {
+  // Auto-distribute ad formats across different slots & screen sizes
+  const getFormat = (): '728x90' | '468x60' | '320x50' | '160x300' => {
     if (format) return format;
-    if (slot.includes('top') || slot.includes('hero') || slot.includes('header')) return '728x90';
-    if (slot.includes('bottom') || slot.includes('footer')) return '468x60';
-    return '468x60';
+    if (slot.includes('top') || slot.includes('hero')) return '320x50';
+    if (slot.includes('bottom') || slot.includes('footer')) return '320x50';
+    if (slot.includes('side')) return '160x300';
+    return '320x50';
   };
 
   const activeFormat = getFormat();
 
   const adConfigMap = {
+    '320x50': {
+      key: '2bcfc1008a1a30ed615a52ba44428110',
+      height: 50,
+      width: 320,
+      maxWidth: '320px',
+    },
     '728x90': {
       key: '44b5f1ef0534d69302a90ee2da766910',
       height: 90,
@@ -91,7 +98,7 @@ export function AdSlot({ slot, className = '', format }: AdSlotProps) {
   }, [activeFormat, adConfig.height, adConfig.key, adConfig.maxWidth, adConfig.width]);
 
   return (
-    <div className={`w-full max-w-4xl mx-auto my-4 flex flex-col items-center justify-center overflow-hidden ${className}`}>
+    <div className={`w-full max-w-4xl mx-auto my-3 flex flex-col items-center justify-center overflow-hidden ${className}`}>
       <span className="text-[10px] text-zinc-600 uppercase tracking-widest font-semibold mb-1 select-none">
         Advertisement
       </span>
