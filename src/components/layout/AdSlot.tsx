@@ -4,28 +4,44 @@ interface AdSlotProps {
   slot: string;
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'banner';
-  format?: '728x90' | '160x300';
+  format?: '728x90' | '468x60' | '160x300';
 }
 
 export function AdSlot({ slot, className = '', format }: AdSlotProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // If format is not explicitly passed, alternate based on slot name
-  const activeFormat: '728x90' | '160x300' = format || (slot.includes('bottom') || slot.includes('2') ? '160x300' : '728x90');
+  // Auto-distribute ad formats across different slots
+  const getFormat = (): '728x90' | '468x60' | '160x300' => {
+    if (format) return format;
+    if (slot.includes('top') || slot.includes('hero') || slot.includes('header')) return '728x90';
+    if (slot.includes('bottom') || slot.includes('footer')) return '468x60';
+    return '468x60';
+  };
 
-  const adConfig = activeFormat === '728x90' 
-    ? {
-        key: '44b5f1ef0534d69302a90ee2da766910',
-        height: 90,
-        width: 728,
-        maxWidth: '728px',
-      }
-    : {
-        key: '9e374bd0a7f8d76f2bd8f1236483cd4b',
-        height: 300,
-        width: 160,
-        maxWidth: '160px',
-      };
+  const activeFormat = getFormat();
+
+  const adConfigMap = {
+    '728x90': {
+      key: '44b5f1ef0534d69302a90ee2da766910',
+      height: 90,
+      width: 728,
+      maxWidth: '728px',
+    },
+    '468x60': {
+      key: 'f9d9a1fa162816ae3fa5f04241c284f5',
+      height: 60,
+      width: 468,
+      maxWidth: '468px',
+    },
+    '160x300': {
+      key: '9e374bd0a7f8d76f2bd8f1236483cd4b',
+      height: 300,
+      width: 160,
+      maxWidth: '160px',
+    },
+  };
+
+  const adConfig = adConfigMap[activeFormat];
 
   useEffect(() => {
     const container = containerRef.current;
