@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+// Adsterra Multi-format Display Ad Component
 
 interface AdSlotProps {
   slot: string;
@@ -8,7 +8,6 @@ interface AdSlotProps {
 }
 
 export function AdSlot({ slot, className = '', format }: AdSlotProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
 
   // Auto-distribute ad formats across different slots & screen sizes
   const getFormat = (): '300x250' | '320x50' | '728x90' | '468x60' | '160x300' | '160x600' => {
@@ -71,7 +70,6 @@ export function AdSlot({ slot, className = '', format }: AdSlotProps) {
         Advertisement
       </span>
       <div
-        ref={containerRef}
         data-ad-slot={slot}
         style={{ minHeight: `${adConfig.height}px`, width: '100%', maxWidth: adConfig.maxWidth }}
         className="flex items-center justify-center bg-[#111]/30 rounded-lg overflow-hidden"
