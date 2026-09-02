@@ -1,32 +1,16 @@
-# React + TypeScript + Vite
+# MetaShot 🕶️
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Convert any photo into authentic **Ray-Ban Meta Smart Glasses** format with embedded hardware EXIF & XMP metadata, native 12MP (3024×4032) portrait rendering, and direct 1-tap **Instagram Stories** sharing.
 
-Currently, two official plugins are available:
+## ✨ Features
+- **100% In-Browser & Private**: Zero server storage or remote image uploads.
+- **Ray-Ban Meta & Spin View Engine**: Injects authentic `Meta AI` & `Ray-Ban Meta Smart Glasses 2` hardware tags.
+- **Optimized for Mobile**: Built for Android & iOS mobile browsers with native Web Share API support.
+- **Monetization Ready**: Integrated lightweight ad slots (2 banners per page).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## 🚀 Built With
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS v4
+- Lucide Icons
+- Piexifjs
