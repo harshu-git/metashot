@@ -56,6 +56,9 @@ export function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-500/5 to-transparent pointer-events-none" />
         
         <div className="z-10 max-w-4xl flex flex-col items-center">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-6">
+            MetaShot • by Harsh Shrimali
+          </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mb-6">
             Make Your Photos <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-indigo-600">Meta-Ready</span>
           </h1>

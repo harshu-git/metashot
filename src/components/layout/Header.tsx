@@ -26,13 +26,14 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-[#1a1a1a]">
-      <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5 group" onClick={closeMenu}>
-          <Aperture className="w-6 h-6 text-white group-hover:text-indigo-400 transition-colors shrink-0" />
-          <div className="flex items-baseline gap-1.5">
+    <header className="sticky top-0 z-50 w-full bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-[#1a1a1a]">
+      <div className="container mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        {/* Brand Logo & Author */}
+        <Link to="/" className="flex items-center gap-2 group" onClick={closeMenu}>
+          <Aperture className="w-6 h-6 text-indigo-400 group-hover:text-indigo-300 transition-colors shrink-0" />
+          <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-2">
             <span className="text-xl font-bold text-white tracking-tight">MetaShot</span>
-            <span className="text-[11px] font-normal text-zinc-400 tracking-normal whitespace-nowrap">by Harsh Shrimali</span>
+            <span className="text-[11px] font-medium text-indigo-400/90 whitespace-nowrap">by Harsh Shrimali</span>
           </div>
         </Link>
 
@@ -71,11 +72,11 @@ export function Header() {
       {isMenuOpen && (
         <div className="fixed inset-0 z-50 bg-[#0a0a0a] flex flex-col">
           <div className="h-16 px-6 flex items-center justify-between border-b border-[#1a1a1a]">
-            <Link to="/" className="flex items-center gap-2.5" onClick={closeMenu}>
-              <Aperture className="w-6 h-6 text-white shrink-0" />
-              <div className="flex items-baseline gap-1.5">
+            <Link to="/" className="flex items-center gap-2" onClick={closeMenu}>
+              <Aperture className="w-6 h-6 text-indigo-400 shrink-0" />
+              <div className="flex items-baseline gap-2">
                 <span className="text-xl font-bold text-white tracking-tight">MetaShot</span>
-                <span className="text-[11px] font-normal text-zinc-400 tracking-normal">by Harsh Shrimali</span>
+                <span className="text-xs font-medium text-indigo-400">by Harsh Shrimali</span>
               </div>
             </Link>
             <button
