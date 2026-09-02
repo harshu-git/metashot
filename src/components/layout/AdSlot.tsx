@@ -4,17 +4,18 @@ interface AdSlotProps {
   slot: string;
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'banner';
-  format?: '728x90' | '468x60' | '320x50' | '160x300';
+  format?: '728x90' | '468x60' | '320x50' | '160x300' | '160x600';
 }
 
 export function AdSlot({ slot, className = '', format }: AdSlotProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Auto-distribute ad formats across different slots & screen sizes
-  const getFormat = (): '728x90' | '468x60' | '320x50' | '160x300' => {
+  const getFormat = (): '728x90' | '468x60' | '320x50' | '160x300' | '160x600' => {
     if (format) return format;
     if (slot.includes('top') || slot.includes('hero')) return '320x50';
     if (slot.includes('bottom') || slot.includes('footer')) return '320x50';
+    if (slot.includes('skyscraper')) return '160x600';
     if (slot.includes('side')) return '160x300';
     return '320x50';
   };
@@ -43,6 +44,12 @@ export function AdSlot({ slot, className = '', format }: AdSlotProps) {
     '160x300': {
       key: '9e374bd0a7f8d76f2bd8f1236483cd4b',
       height: 300,
+      width: 160,
+      maxWidth: '160px',
+    },
+    '160x600': {
+      key: '3b690f9a35d3cd686616883fbf16ab99',
+      height: 600,
       width: 160,
       maxWidth: '160px',
     },
