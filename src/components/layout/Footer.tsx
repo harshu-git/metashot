@@ -8,9 +8,12 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Column 1 */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center gap-2">
-              <Aperture className="w-6 h-6 text-white" />
-              <span className="text-xl font-bold text-white tracking-tight">MetaShot</span>
+            <Link to="/" className="flex items-center gap-2.5">
+              <Aperture className="w-6 h-6 text-white shrink-0" />
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-xl font-bold text-white tracking-tight">MetaShot</span>
+                <span className="text-[11px] font-normal text-zinc-400 tracking-normal">by Harsh Shrimali</span>
+              </div>
             </Link>
             <p className="text-zinc-400 text-sm">
               Browser-based photo processing tool for premium quality outputs.

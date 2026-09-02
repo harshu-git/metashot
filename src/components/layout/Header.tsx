@@ -28,9 +28,12 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-[#1a1a1a]">
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group" onClick={closeMenu}>
-          <Aperture className="w-6 h-6 text-white group-hover:text-indigo-400 transition-colors" />
-          <span className="text-xl font-bold text-white tracking-tight">MetaShot</span>
+        <Link to="/" className="flex items-center gap-2.5 group" onClick={closeMenu}>
+          <Aperture className="w-6 h-6 text-white group-hover:text-indigo-400 transition-colors shrink-0" />
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-xl font-bold text-white tracking-tight">MetaShot</span>
+            <span className="text-[11px] font-normal text-zinc-400 tracking-normal whitespace-nowrap">by Harsh Shrimali</span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
@@ -68,9 +71,12 @@ export function Header() {
       {isMenuOpen && (
         <div className="fixed inset-0 z-50 bg-[#0a0a0a] flex flex-col">
           <div className="h-16 px-6 flex items-center justify-between border-b border-[#1a1a1a]">
-            <Link to="/" className="flex items-center gap-2" onClick={closeMenu}>
-              <Aperture className="w-6 h-6 text-white" />
-              <span className="text-xl font-bold text-white tracking-tight">MetaShot</span>
+            <Link to="/" className="flex items-center gap-2.5" onClick={closeMenu}>
+              <Aperture className="w-6 h-6 text-white shrink-0" />
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-xl font-bold text-white tracking-tight">MetaShot</span>
+                <span className="text-[11px] font-normal text-zinc-400 tracking-normal">by Harsh Shrimali</span>
+              </div>
             </Link>
             <button
               className="p-2 text-zinc-400 hover:text-white transition-colors"
