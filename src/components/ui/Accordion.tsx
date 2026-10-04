@@ -26,10 +26,10 @@ export function Accordion({ items, className = '' }: AccordionProps) {
         return (
           <div 
             key={index} 
-            className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
+            className={`rounded-2xl border transition-all duration-250 overflow-hidden backdrop-blur-xl ${
               isOpen 
-                ? 'bg-[#15151c] border-indigo-500/35 shadow-lg shadow-indigo-500/5' 
-                : 'bg-[#111116] border-white/[0.08] hover:border-white/15 hover:bg-[#141419]'
+                ? 'glass-panel border-indigo-500/50 shadow-xl shadow-indigo-500/10' 
+                : 'glass-panel-interactive border-white/[0.08] hover:border-white/20'
             }`}
           >
             <button

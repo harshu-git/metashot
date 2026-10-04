@@ -19,7 +19,7 @@ export function PrivacyPage() {
 
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-4 shadow-sm">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>Privacy Guaranteed</span>
           </div>
@@ -34,7 +34,7 @@ export function PrivacyPage() {
 
         <div className="space-y-6 text-zinc-400 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto">
           {/* Key Principle Banner */}
-          <div className="glass-panel rounded-3xl border border-emerald-500/30 p-6 sm:p-8 bg-emerald-950/10">
+          <div className="glass-panel rounded-3xl border border-emerald-500/35 p-6 sm:p-8 bg-emerald-950/20 backdrop-blur-2xl shadow-2xl">
             <div className="flex items-center gap-3 mb-3 text-emerald-400">
               <ServerOff className="w-6 h-6 shrink-0" />
               <h2 className="text-lg font-bold text-white">100% Client-Side Processing Architecture</h2>
@@ -44,7 +44,7 @@ export function PrivacyPage() {
             </p>
           </div>
 
-          <section className="glass-panel rounded-3xl border border-white/[0.08] p-6 sm:p-8">
+          <section className="glass-panel rounded-3xl border border-white/[0.1] p-6 sm:p-8 backdrop-blur-2xl shadow-2xl">
             <h2 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
               <Lock className="w-5 h-5 text-indigo-400" />
               <span>1. Overview</span>
@@ -54,7 +54,7 @@ export function PrivacyPage() {
             </p>
           </section>
 
-          <section className="glass-panel rounded-3xl border border-white/[0.08] p-6 sm:p-8">
+          <section className="glass-panel rounded-3xl border border-white/[0.1] p-6 sm:p-8 backdrop-blur-2xl shadow-2xl">
             <h2 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
               <EyeOff className="w-5 h-5 text-purple-400" />
               <span>2. Zero Personal Data Collection</span>
@@ -70,7 +70,7 @@ export function PrivacyPage() {
             </ul>
           </section>
 
-          <section className="glass-panel rounded-3xl border border-white/[0.08] p-6 sm:p-8">
+          <section className="glass-panel rounded-3xl border border-white/[0.1] p-6 sm:p-8 backdrop-blur-2xl shadow-2xl">
             <h2 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-indigo-400" />
               <span>3. Analytics & Advertisements</span>

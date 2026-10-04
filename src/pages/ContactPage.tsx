@@ -27,7 +27,7 @@ export function ContactPage() {
 
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill border border-indigo-500/25 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-4 shadow-sm">
             <Mail className="w-3.5 h-3.5" />
             <span>Get In Touch</span>
           </div>
@@ -44,7 +44,7 @@ export function ContactPage() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 max-w-3xl mx-auto">
           {/* Email Support Card with One-Tap Copy */}
-          <div className="glass-panel rounded-3xl border border-white/[0.08] p-7 sm:p-8 flex flex-col items-center text-center shadow-xl hover:border-white/[0.14] transition-colors relative group">
+          <div className="glass-panel-interactive rounded-3xl border border-white/[0.1] p-7 sm:p-8 flex flex-col items-center text-center shadow-xl backdrop-blur-2xl relative group">
             <div className="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-5 group-hover:scale-110 transition-transform">
               <Mail className="w-7 h-7" />
             </div>
@@ -53,7 +53,7 @@ export function ContactPage() {
               For bug reports, technical inquiries, and general questions.
             </p>
 
-            <div className="w-full flex items-center gap-2 bg-white/[0.03] p-2 rounded-2xl border border-white/[0.06]">
+            <div className="w-full flex items-center gap-2 glass-pill p-2 rounded-2xl border border-white/[0.08]">
               <a 
                 href={`mailto:${email}`} 
                 className="flex-1 truncate text-xs sm:text-sm font-mono text-indigo-400 hover:text-indigo-300 font-semibold text-left px-2"
@@ -63,7 +63,7 @@ export function ContactPage() {
               <button
                 type="button"
                 onClick={handleCopy}
-                className="p-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] text-zinc-300 hover:text-white transition-all active:scale-95 shrink-0"
+                className="p-2 rounded-xl bg-white/[0.08] hover:bg-white/[0.16] text-zinc-300 hover:text-white transition-all active:scale-95 shrink-0 border border-white/[0.08]"
                 title="Copy email to clipboard"
                 aria-label="Copy email address"
               >
@@ -78,7 +78,7 @@ export function ContactPage() {
           </div>
 
           {/* Feedback & Feature Requests Card */}
-          <div className="glass-panel rounded-3xl border border-white/[0.08] p-7 sm:p-8 flex flex-col items-center text-center shadow-xl hover:border-white/[0.14] transition-colors relative group">
+          <div className="glass-panel-interactive rounded-3xl border border-white/[0.1] p-7 sm:p-8 flex flex-col items-center text-center shadow-xl backdrop-blur-2xl relative group">
             <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-5 group-hover:scale-110 transition-transform">
               <MessageSquare className="w-7 h-7" />
             </div>
@@ -89,7 +89,7 @@ export function ContactPage() {
             
             <a
               href={`mailto:${email}?subject=MetaShot%20Feature%20Suggestion`}
-              className="w-full flex items-center justify-center gap-2 h-11 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] text-white border border-white/[0.08] text-sm font-semibold transition-all active:scale-[0.98]"
+              className="w-full flex items-center justify-center gap-2 h-11 rounded-2xl glass-pill hover:bg-white/[0.1] text-white border border-white/[0.12] text-sm font-semibold transition-all active:scale-[0.98]"
             >
               <Send className="w-4 h-4 text-purple-400" />
               <span>Send Feature Idea</span>
@@ -98,7 +98,7 @@ export function ContactPage() {
         </div>
 
         {/* SLA / Notice Banner */}
-        <div className="max-w-3xl mx-auto glass-panel rounded-2xl border border-white/[0.06] p-5 text-center flex items-center justify-center gap-2.5 text-zinc-400 text-xs sm:text-sm">
+        <div className="max-w-3xl mx-auto glass-panel rounded-2xl border border-white/[0.08] p-5 text-center flex items-center justify-center gap-2.5 text-zinc-300 text-xs sm:text-sm backdrop-blur-xl">
           <Clock className="w-4 h-4 text-indigo-400 shrink-0" />
           <span>Independent developer project • Replies typically sent within 24 to 48 hours.</span>
         </div>

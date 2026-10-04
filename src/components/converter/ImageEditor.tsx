@@ -126,10 +126,10 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
                   key={profile.id}
                   type="button"
                   onClick={() => setSelectedProfile(profile.id)}
-                  className={`p-3.5 rounded-xl text-left transition-all duration-200 border flex items-start justify-between relative overflow-hidden active:scale-[0.99]
+                  className={`p-3.5 rounded-2xl text-left transition-all duration-200 border flex items-start justify-between relative overflow-hidden active:scale-[0.99] backdrop-blur-xl
                     ${isSelected 
-                      ? 'bg-gradient-to-r from-indigo-950/40 to-purple-950/30 border-indigo-500/80 text-white shadow-lg shadow-indigo-950/40 ring-1 ring-indigo-500/40' 
-                      : 'bg-white/[0.02] border-white/[0.07] text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.05] hover:border-white/[0.12]'}`}
+                      ? 'bg-gradient-to-r from-indigo-950/50 via-purple-950/40 to-indigo-950/50 border-indigo-500/80 text-white shadow-xl shadow-indigo-950/50 ring-1 ring-indigo-500/50' 
+                      : 'glass-card-subtle text-zinc-400 hover:text-zinc-200 hover:border-white/[0.18]'}`}
                 >
                   <div className="pr-2">
                     <div className="text-xs sm:text-sm font-semibold text-white flex items-center gap-1.5">
@@ -157,7 +157,7 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
               <SlidersHorizontal className="w-3.5 h-3.5 text-indigo-400" />
               Framing & Crop Presets
             </label>
-            <span className="text-[11px] text-indigo-400 font-medium bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20">
+            <span className="text-[11px] text-indigo-400 font-medium glass-pill px-2.5 py-0.5 rounded-full border border-indigo-500/25">
               3:4 Recommended for Stories
             </span>
           </div>
@@ -170,10 +170,10 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
                   key={preset.label}
                   type="button"
                   onClick={() => setAspect(preset.value)}
-                  className={`py-2.5 px-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 active:scale-95 text-center flex flex-col items-center justify-center gap-0.5
+                  className={`py-2.5 px-2 rounded-2xl text-xs sm:text-sm font-medium transition-all duration-200 active:scale-95 text-center flex flex-col items-center justify-center gap-0.5 backdrop-blur-xl
                     ${isSelected 
                       ? 'bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-lg shadow-indigo-600/30 border border-indigo-400/40' 
-                      : 'bg-white/[0.03] text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.06] border border-white/[0.07]'}`}
+                      : 'glass-pill text-zinc-300 hover:text-white hover:bg-white/[0.09]'}`}
                 >
                   <span>{preset.label}</span>
                   {preset.label.includes('3:4') && (
@@ -202,7 +202,7 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
               <button
                 type="button"
                 onClick={() => adjustZoom(-0.2)}
-                className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.03] hover:bg-white/[0.08] text-zinc-300 border border-white/[0.08] active:scale-90 transition-all shrink-0"
+                className="w-10 h-10 flex items-center justify-center rounded-xl glass-pill hover:bg-white/[0.1] text-zinc-300 border border-white/[0.1] active:scale-90 transition-all shrink-0"
                 aria-label="Zoom out"
               >
                 <ZoomOut className="w-4 h-4" />
@@ -220,7 +220,7 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
               <button
                 type="button"
                 onClick={() => adjustZoom(0.2)}
-                className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.03] hover:bg-white/[0.08] text-zinc-300 border border-white/[0.08] active:scale-90 transition-all shrink-0"
+                className="w-10 h-10 flex items-center justify-center rounded-xl glass-pill hover:bg-white/[0.1] text-zinc-300 border border-white/[0.1] active:scale-90 transition-all shrink-0"
                 aria-label="Zoom in"
               >
                 <ZoomIn className="w-4 h-4" />
@@ -235,7 +235,7 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
                 <RotateCw className="w-3.5 h-3.5 text-indigo-400" />
                 Rotate Angle
               </label>
-              <span className="text-zinc-400 font-mono text-xs bg-white/[0.04] px-2 py-0.5 rounded-md border border-white/[0.06]">
+              <span className="text-zinc-300 font-mono text-xs glass-pill px-2.5 py-0.5 rounded-md border border-white/[0.08]">
                 {rotation}°
               </span>
             </div>
@@ -243,7 +243,7 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
               <button 
                 type="button"
                 onClick={() => setRotation(r => r - 90)}
-                className="flex-1 h-10 flex items-center justify-center gap-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] text-zinc-300 border border-white/[0.08] text-xs sm:text-sm font-medium active:scale-95 transition-all"
+                className="flex-1 h-10 flex items-center justify-center gap-2 rounded-xl glass-pill hover:bg-white/[0.1] text-zinc-300 border border-white/[0.1] text-xs sm:text-sm font-medium active:scale-95 transition-all"
               >
                 <RotateCcw className="w-3.5 h-3.5 text-indigo-400" />
                 -90°
@@ -251,7 +251,7 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
               <button 
                 type="button"
                 onClick={() => setRotation(r => r + 90)}
-                className="flex-1 h-10 flex items-center justify-center gap-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] text-zinc-300 border border-white/[0.08] text-xs sm:text-sm font-medium active:scale-95 transition-all"
+                className="flex-1 h-10 flex items-center justify-center gap-2 rounded-xl glass-pill hover:bg-white/[0.1] text-zinc-300 border border-white/[0.1] text-xs sm:text-sm font-medium active:scale-95 transition-all"
               >
                 <RotateCw className="w-3.5 h-3.5 text-indigo-400" />
                 +90°

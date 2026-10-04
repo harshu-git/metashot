@@ -108,10 +108,10 @@ export function UploadArea({ onFileSelected }: UploadAreaProps) {
   return (
     <div className="w-full flex flex-col items-center gap-4">
       <div 
-        className={`w-full min-h-[300px] sm:min-h-[360px] md:min-h-[420px] flex flex-col items-center justify-center rounded-3xl border-2 border-dashed transition-all duration-300 cursor-pointer p-6 sm:p-12 relative overflow-hidden group touch-manipulation
+        className={`w-full min-h-[300px] sm:min-h-[360px] md:min-h-[420px] flex flex-col items-center justify-center rounded-3xl border-2 border-dashed transition-all duration-300 cursor-pointer p-6 sm:p-12 relative overflow-hidden group touch-manipulation backdrop-blur-2xl
           ${isDragging 
-            ? 'bg-indigo-950/30 border-indigo-400 scale-[1.01] shadow-2xl shadow-indigo-500/20' 
-            : 'bg-[#111116]/80 border-white/[0.12] hover:border-indigo-500/50 hover:bg-[#14141c] shadow-xl'}`}
+            ? 'bg-indigo-950/40 border-indigo-400 scale-[1.01] shadow-2xl shadow-indigo-500/25' 
+            : 'glass-panel-interactive border-white/[0.12] hover:border-indigo-500/50 shadow-2xl'}`}
         onDragEnter={handleDragEnter}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
@@ -119,7 +119,7 @@ export function UploadArea({ onFileSelected }: UploadAreaProps) {
         onClick={() => fileInputRef.current?.click()}
       >
         {/* Subtle background radial glow */}
-        <div className="absolute inset-0 bg-radial-glow opacity-60 pointer-events-none group-hover:opacity-100 transition-opacity" />
+        <div className="absolute inset-0 bg-radial-glow opacity-70 pointer-events-none group-hover:opacity-100 transition-opacity" />
 
         <input 
           type="file" 
@@ -148,7 +148,7 @@ export function UploadArea({ onFileSelected }: UploadAreaProps) {
             <div className={`w-20 h-20 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xl
               ${isDragging 
                 ? 'bg-gradient-to-br from-indigo-500 to-indigo-600 text-white scale-110 shadow-indigo-500/40' 
-                : 'bg-[#181820] text-indigo-400 border border-white/[0.08] group-hover:border-indigo-500/40 group-hover:scale-105'}`}>
+                : 'glass-card-subtle text-indigo-400 border border-white/[0.12] group-hover:border-indigo-500/50 group-hover:scale-105'}`}>
               {isLoadingFile ? (
                 <div className="w-9 h-9 border-3 border-indigo-400 border-t-transparent rounded-full animate-spin" />
               ) : (
@@ -170,7 +170,7 @@ export function UploadArea({ onFileSelected }: UploadAreaProps) {
               {['JPG', 'PNG', 'WEBP', 'Apple HEIC'].map((format) => (
                 <span 
                   key={format}
-                  className="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.06] text-zinc-400 font-medium"
+                  className="px-3 py-1 rounded-xl glass-pill text-zinc-300 font-medium"
                 >
                   {format}
                 </span>
@@ -179,7 +179,7 @@ export function UploadArea({ onFileSelected }: UploadAreaProps) {
 
             {/* Visual Action Button */}
             <div className="pt-2">
-              <span className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-500 text-white text-sm sm:text-base font-semibold px-6 py-3 rounded-2xl shadow-xl shadow-indigo-500/30 group-hover:shadow-indigo-500/50 group-hover:scale-[1.02] transition-all">
+              <span className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-500 text-white text-sm sm:text-base font-semibold px-6 py-3 rounded-2xl shadow-xl shadow-indigo-500/30 group-hover:shadow-indigo-500/50 group-hover:scale-[1.02] transition-all border border-white/20 animate-shimmer">
                 <Sparkles className="w-4 h-4 text-indigo-200" />
                 <span>Select Photo</span>
               </span>
@@ -189,7 +189,7 @@ export function UploadArea({ onFileSelected }: UploadAreaProps) {
       </div>
 
       {/* Trust & Privacy Badge */}
-      <div className="flex items-center gap-2 text-xs text-zinc-500">
+      <div className="flex items-center gap-2 text-xs text-zinc-400 glass-pill px-4 py-2 rounded-full border border-white/[0.08] shadow-md">
         <ShieldCheck className="w-4 h-4 text-emerald-400" />
         <span>100% On-Device Processing. No photos are uploaded to any server.</span>
       </div>

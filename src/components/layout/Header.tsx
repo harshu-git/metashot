@@ -43,7 +43,7 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-[#09090b]/85 backdrop-blur-2xl border-b border-white/[0.07] transition-colors">
+      <header className="sticky top-0 z-40 w-full glass-header transition-colors">
         <div className="container mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           {/* Brand Logo & Author */}
           <Link 
@@ -66,7 +66,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1.5 bg-[#121217]/70 p-1.5 rounded-2xl border border-white/[0.06] shadow-inner">
+          <nav className="hidden md:flex items-center gap-1.5 glass-card-subtle p-1.5 rounded-2xl border border-white/[0.1] shadow-inner">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
               return (
@@ -75,8 +75,8 @@ export function Header() {
                   to={link.path}
                   className={`text-sm font-medium px-4 py-1.5 rounded-xl transition-all duration-150 outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 ${
                     isActive 
-                      ? 'bg-white/[0.08] text-white shadow-sm font-semibold' 
-                      : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
+                      ? 'bg-white/[0.12] backdrop-blur-md text-white shadow-sm font-semibold border border-white/[0.14]' 
+                      : 'text-zinc-400 hover:text-white hover:bg-white/[0.06] hover:backdrop-blur-sm'
                   }`}
                 >
                   {link.label}
@@ -89,7 +89,7 @@ export function Header() {
           <div className="hidden md:flex items-center gap-3">
             <Link
               to="/converter"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-400 hover:to-indigo-500 text-white text-sm font-semibold px-4.5 py-2 rounded-xl transition-all duration-200 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 active:scale-[0.98] outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 via-indigo-600 to-violet-600 hover:opacity-95 text-white text-sm font-semibold px-4.5 py-2 rounded-xl transition-all duration-200 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 active:scale-[0.98] outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 border border-white/20 animate-shimmer"
             >
               <Sparkles className="w-4 h-4 text-indigo-200" />
               <span>Upload Photo</span>
@@ -99,7 +99,7 @@ export function Header() {
           {/* Mobile Menu Button (44px min touch target) */}
           <button
             type="button"
-            className="md:hidden w-11 h-11 flex items-center justify-center text-zinc-400 hover:text-white bg-[#14141a] hover:bg-[#1a1a24] rounded-xl border border-white/[0.08] transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+            className="md:hidden w-11 h-11 flex items-center justify-center text-zinc-300 hover:text-white glass-pill hover:bg-white/[0.1] rounded-xl border border-white/[0.12] transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
             onClick={() => setIsMenuOpen(true)}
             aria-label="Open navigation menu"
           >
@@ -146,10 +146,10 @@ export function Header() {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`flex items-center justify-between px-4 py-3.5 rounded-xl border text-base font-semibold transition-all min-h-[48px] ${
+                  className={`flex items-center justify-between px-4.5 py-3.5 rounded-2xl border text-base font-semibold transition-all min-h-[48px] backdrop-blur-xl ${
                     isActive 
-                      ? 'bg-indigo-500/10 border-indigo-500/35 text-indigo-400 shadow-sm' 
-                      : 'bg-[#121217] border-white/[0.06] text-zinc-200 hover:text-white hover:bg-[#16161e]'
+                      ? 'glass-panel border-indigo-500/40 text-indigo-400 shadow-md' 
+                      : 'glass-panel-interactive border-white/[0.08] text-zinc-200 hover:text-white'
                   }`}
                   onClick={closeMenu}
                 >

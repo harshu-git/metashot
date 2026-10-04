@@ -17,7 +17,7 @@ export function AboutPage() {
 
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill border border-indigo-500/25 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-4 shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Our Story</span>
           </div>
@@ -34,7 +34,7 @@ export function AboutPage() {
         
         <div className="space-y-8">
           {/* Main Story Card */}
-          <div className="glass-panel rounded-3xl border border-white/[0.08] p-7 sm:p-10 shadow-2xl relative overflow-hidden">
+          <div className="glass-panel rounded-3xl border border-white/[0.1] p-7 sm:p-10 shadow-2xl relative overflow-hidden backdrop-blur-2xl">
             <h2 className="text-2xl font-bold text-white flex items-center gap-3 mb-4">
               <div className="p-2.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
                 <Info className="w-5 h-5" />
@@ -51,7 +51,7 @@ export function AboutPage() {
 
           {/* Mission and Privacy Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="glass-panel rounded-3xl border border-white/[0.08] p-7 sm:p-8 hover:border-white/[0.12] transition-colors">
+            <div className="glass-panel-interactive rounded-3xl border border-white/[0.1] p-7 sm:p-8 backdrop-blur-2xl">
               <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-5">
                 <Target className="w-6 h-6" />
               </div>
@@ -61,7 +61,7 @@ export function AboutPage() {
               </p>
             </div>
             
-            <div className="glass-panel rounded-3xl border border-white/[0.08] p-7 sm:p-8 hover:border-white/[0.12] transition-colors">
+            <div className="glass-panel-interactive rounded-3xl border border-white/[0.1] p-7 sm:p-8 backdrop-blur-2xl">
               <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-5">
                 <Shield className="w-6 h-6" />
               </div>
@@ -73,7 +73,7 @@ export function AboutPage() {
           </div>
 
           {/* Creator Attribution Card */}
-          <div className="glass-panel rounded-3xl border border-white/[0.08] p-6 sm:p-8 text-center flex flex-col items-center justify-center">
+          <div className="glass-panel rounded-3xl border border-white/[0.1] p-6 sm:p-8 text-center flex flex-col items-center justify-center backdrop-blur-2xl">
             <div className="inline-flex items-center gap-2 text-indigo-400 font-semibold text-sm mb-2">
               <Heart className="w-4 h-4 text-pink-400 fill-pink-400/20" />
               <span>Created with care</span>
@@ -84,7 +84,7 @@ export function AboutPage() {
           </div>
 
           {/* Legal Disclaimer */}
-          <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.05] text-center">
+          <div className="p-6 rounded-2xl glass-card-subtle border border-white/[0.08] text-center">
             <h2 className="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Independent Project Disclaimer</h2>
             <p className="text-zinc-500 text-xs leading-relaxed max-w-2xl mx-auto">
               MetaShot is an independent third-party project. It is not affiliated with, endorsed by, sponsored by, or connected to Meta Platforms, Inc., Ray-Ban, EssilorLuxottica, Instagram, or any of their respective subsidiaries or affiliates. All trademarks, service marks, trade names, and product names belong to their respective owners.

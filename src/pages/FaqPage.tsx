@@ -71,7 +71,7 @@ export function FaqPage() {
 
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill border border-indigo-500/25 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-4 shadow-sm">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>Support & Documentation</span>
           </div>
@@ -92,7 +92,7 @@ export function FaqPage() {
         </div>
         
         {/* Still Have Questions CTA Card */}
-        <div className="mt-16 max-w-3xl mx-auto p-8 rounded-3xl glass-panel border border-white/[0.08] text-center shadow-2xl relative overflow-hidden">
+        <div className="mt-16 max-w-3xl mx-auto p-8 rounded-3xl glass-panel border border-white/[0.1] text-center shadow-2xl relative overflow-hidden backdrop-blur-2xl">
           <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mx-auto mb-4">
             <MessageSquare className="w-6 h-6" />
           </div>

@@ -3,7 +3,7 @@ import { Aperture, ShieldCheck, Heart } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="bg-[#09090b] border-t border-white/[0.08] pt-16 pb-12 px-4 sm:px-6 relative overflow-hidden">
+    <footer className="glass-footer pt-16 pb-12 px-4 sm:px-6 relative overflow-hidden">
       {/* Subtle background ambient glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-2xl h-px bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent pointer-events-none" />
 
@@ -23,7 +23,7 @@ export function Footer() {
             <p className="text-zinc-400 text-sm leading-relaxed">
               Browser-based photo processing tool for authentic Meta camera compatibility. 100% on-device.
             </p>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-pill border border-emerald-500/25 text-emerald-400 text-xs font-medium">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Zero server uploads</span>
             </div>

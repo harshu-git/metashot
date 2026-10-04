@@ -28,9 +28,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const variants = {
       primary: 'bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-500 hover:from-indigo-400 hover:to-indigo-500 text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 border border-indigo-400/30',
       glow: 'bg-gradient-to-r from-indigo-500 via-violet-600 to-indigo-600 text-white shadow-xl shadow-indigo-500/30 hover:shadow-indigo-500/50 border border-white/20 animate-shimmer',
-      secondary: 'bg-[#18181f] hover:bg-[#22222b] text-zinc-200 hover:text-white border border-white/10 hover:border-white/20 shadow-sm',
-      ghost: 'bg-transparent hover:bg-white/[0.06] text-zinc-400 hover:text-white border border-transparent',
-      danger: 'bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20',
+      secondary: 'bg-white/[0.05] hover:bg-white/[0.1] text-zinc-200 hover:text-white border border-white/[0.12] hover:border-white/[0.22] shadow-md backdrop-blur-xl',
+      ghost: 'bg-transparent hover:bg-white/[0.06] hover:backdrop-blur-md text-zinc-400 hover:text-white border border-transparent hover:border-white/[0.09]',
+      danger: 'bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 backdrop-blur-md',
     };
 
     const sizes = {

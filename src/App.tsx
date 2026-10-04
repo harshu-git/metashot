@@ -84,10 +84,16 @@ function App() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#09090b] text-[#f4f4f5] selection:bg-indigo-500/30 selection:text-white">
+    <div className="relative flex flex-col min-h-screen bg-[#070709] text-[#f4f4f5] selection:bg-indigo-500/30 selection:text-white overflow-x-hidden">
+      {/* Fixed Ambient Chromatic Underglows for Everywhere Glassmorphism */}
+      <div className="fixed top-[-8%] left-[-8%] w-[55vw] h-[55vw] max-w-[650px] max-h-[650px] rounded-full bg-indigo-600/14 blur-[140px] pointer-events-none -z-10 animate-float-1" />
+      <div className="fixed top-[35%] right-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full bg-purple-600/10 blur-[150px] pointer-events-none -z-10 animate-float-2" />
+      <div className="fixed bottom-[-10%] left-[15%] w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] rounded-full bg-pink-600/8 blur-[160px] pointer-events-none -z-10 animate-float-1" />
+      <div className="fixed inset-0 bg-radial-mesh opacity-40 pointer-events-none -z-10" />
+
       <ScrollToTop lenisRef={lenisRef} />
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 relative z-10">
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<HomePage />} />

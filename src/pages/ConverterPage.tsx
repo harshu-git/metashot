@@ -116,8 +116,8 @@ export default function ConverterPage() {
         {(state === 'editing' || state === 'processing') && imageFile && (
           <div className="relative">
             {error && (
-              <div className="mb-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center justify-center gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0" />
+              <div className="mb-6 p-4 rounded-2xl glass-panel bg-red-950/20 border border-red-500/30 text-red-400 text-sm flex items-center justify-center gap-2 backdrop-blur-xl shadow-lg">
+                <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
                 <span>{error}</span>
               </div>
             )}

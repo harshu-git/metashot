@@ -85,12 +85,12 @@ export function HowItWorksPage() {
                 }`}
               >
                 {/* Timeline Node */}
-                <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-indigo-400 bg-[#09090b] text-indigo-400 font-bold text-xs shadow-lg shadow-indigo-500/20 shrink-0 md:order-1 md:-translate-x-1/2 z-10 transition-transform group-hover:scale-110">
+                <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-indigo-400/90 glass-pill bg-white/[0.06] text-indigo-300 font-bold text-xs shadow-xl shadow-indigo-500/25 shrink-0 md:order-1 md:-translate-x-1/2 z-10 transition-transform group-hover:scale-110 backdrop-blur-xl">
                   {step.num}
                 </div>
 
                 {/* Content Card */}
-                <div className={`w-[calc(100%-3.5rem)] md:w-[calc(50%-2.5rem)] glass-panel-interactive rounded-3xl p-6 sm:p-7 border border-white/[0.08] ${
+                <div className={`w-[calc(100%-3.5rem)] md:w-[calc(50%-2.5rem)] glass-panel-interactive rounded-3xl p-6 sm:p-7 border border-white/[0.1] ${
                   isEven ? 'md:mr-auto' : 'md:ml-auto'
                 }`}>
                   <div className="flex items-center gap-3 mb-3">
@@ -112,7 +112,7 @@ export function HowItWorksPage() {
         </div>
 
         {/* 100% On-Device Privacy Guarantee Callout */}
-        <div className="mt-20 p-8 sm:p-10 rounded-3xl glass-panel border border-emerald-500/30 text-center relative overflow-hidden shadow-2xl">
+        <div className="mt-20 p-8 sm:p-10 rounded-3xl glass-panel border border-emerald-500/35 bg-emerald-950/20 text-center relative overflow-hidden shadow-2xl backdrop-blur-2xl">
           <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mx-auto mb-4">
             <ShieldCheck className="w-7 h-7" />
           </div>

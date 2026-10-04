@@ -59,7 +59,7 @@ export function HomePage() {
         
         <div className="z-10 max-w-4xl flex flex-col items-center">
           {/* Luminous Status Pill */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-white/[0.08] text-xs font-semibold uppercase tracking-wider mb-8 text-zinc-300 shadow-xl shadow-black/40">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-pill border border-white/[0.14] text-xs font-semibold uppercase tracking-wider mb-8 text-zinc-300 shadow-xl shadow-black/40">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-white font-medium">MetaShot</span>
             <span className="text-zinc-500">•</span>
@@ -100,16 +100,16 @@ export function HomePage() {
           </div>
 
           {/* Trust Guarantees */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-zinc-400">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.06]">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-zinc-300">
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill border border-white/[0.1] shadow-sm">
               <Shield className="w-4 h-4 text-emerald-400" />
               <span>No sign-up needed</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.06]">
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill border border-white/[0.1] shadow-sm">
               <Monitor className="w-4 h-4 text-indigo-400" />
               <span>100% In-browser</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.06]">
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-pill border border-white/[0.1] shadow-sm">
               <Lock className="w-4 h-4 text-purple-400" />
               <span>Zero server uploads</span>
             </div>
@@ -190,7 +190,7 @@ export function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="glass-panel rounded-3xl p-7 flex gap-5 border border-white/[0.07] hover:border-white/[0.12] transition-colors">
+            <div className="glass-panel-interactive rounded-3xl p-7 flex gap-5 border border-white/[0.09]">
               <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0">
                 <Zap className="w-6 h-6" />
               </div>
@@ -202,7 +202,7 @@ export function HomePage() {
               </div>
             </div>
             
-            <div className="glass-panel rounded-3xl p-7 flex gap-5 border border-white/[0.07] hover:border-white/[0.12] transition-colors">
+            <div className="glass-panel-interactive rounded-3xl p-7 flex gap-5 border border-white/[0.09]">
               <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
                 <Shield className="w-6 h-6" />
               </div>
@@ -214,7 +214,7 @@ export function HomePage() {
               </div>
             </div>
 
-            <div className="glass-panel rounded-3xl p-7 flex gap-5 border border-white/[0.07] hover:border-white/[0.12] transition-colors">
+            <div className="glass-panel-interactive rounded-3xl p-7 flex gap-5 border border-white/[0.09]">
               <div className="w-12 h-12 rounded-2xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 shrink-0">
                 <Smartphone className="w-6 h-6" />
               </div>
@@ -226,7 +226,7 @@ export function HomePage() {
               </div>
             </div>
 
-            <div className="glass-panel rounded-3xl p-7 flex gap-5 border border-white/[0.07] hover:border-white/[0.12] transition-colors">
+            <div className="glass-panel-interactive rounded-3xl p-7 flex gap-5 border border-white/[0.09]">
               <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 shrink-0">
                 <ImageIcon className="w-6 h-6" />
               </div>
