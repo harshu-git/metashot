@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Download, Plus, Share2, Check, Glasses, CheckCircle2 } from 'lucide-react';
+import { Download, Plus, Share2, Check, Glasses, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
 import type { ProcessedImage } from '../../types';
 import { Button } from '../ui/Button';
 
@@ -49,98 +49,111 @@ export function ResultView({ processedImage, onCreateAnother }: ResultViewProps)
 
   return (
     <div className="w-full flex flex-col space-y-6 items-center">
-      {/* Header Badge */}
-      <div className="text-center space-y-2">
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider shadow-sm">
+      {/* Inspira Celebration Header */}
+      <div className="text-center space-y-3 max-w-lg">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-semibold uppercase tracking-wider shadow-lg shadow-emerald-500/10">
           <Glasses className="w-4 h-4" />
-          Meta Photo Generated
+          <span>Meta Photo Ready</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
         </div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Your Meta photo is ready!</h2>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+          Ready for <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400">Instagram Stories</span>
+        </h2>
         <p className="text-zinc-400 text-xs sm:text-sm">
-          Share directly to <strong>Instagram Stories</strong> to activate the glasses mode.
+          Hardware tags injected. Post directly to Stories to unlock the glasses indicator.
         </p>
       </div>
       
-      {/* Photo Preview */}
-      <div className="w-full max-w-xl bg-[#121212] p-3 sm:p-4 rounded-2xl border border-[#262626] shadow-2xl">
-        <img 
-          src={processedImage.url} 
-          alt="Processed result" 
-          className="w-full max-h-[380px] sm:max-h-[460px] object-contain rounded-xl bg-black/40"
-        />
+      {/* Framed Image Preview */}
+      <div className="w-full max-w-xl glass-panel p-3 sm:p-4 rounded-3xl border border-white/[0.1] shadow-2xl relative overflow-hidden group">
+        <div className="relative overflow-hidden rounded-2xl bg-[#09090b]">
+          <img 
+            src={processedImage.url} 
+            alt="Processed result with Meta EXIF tags" 
+            className="w-full max-h-[380px] sm:max-h-[460px] object-contain rounded-2xl mx-auto"
+          />
+        </div>
       </div>
 
-      {/* Direct Story Action Callout */}
-      <div className="w-full max-w-xl bg-gradient-to-r from-pink-950/40 via-purple-950/30 to-indigo-950/40 rounded-2xl p-4 sm:p-5 border border-pink-500/30 shadow-xl text-center space-y-3">
+      {/* Direct Story Action Callout Card */}
+      <div className="w-full max-w-xl relative rounded-3xl p-5 sm:p-6 border border-pink-500/30 bg-gradient-to-br from-pink-950/30 via-purple-950/20 to-[#09090b] shadow-2xl text-center space-y-4 overflow-hidden">
         <div className="flex items-center justify-center gap-2 text-pink-400 font-semibold text-sm">
-          <Glasses className="w-5 h-5" />
-          <span>Post Directly to Instagram Stories</span>
+          <Sparkles className="w-4 h-4" />
+          <span>Instant Instagram Story Sharing</span>
         </div>
-        <p className="text-zinc-300 text-xs sm:text-sm">
-          Tap below to open your phone's share menu, then select <strong>Instagram Stories</strong> to post with the glasses feature active!
+        <p className="text-zinc-300 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
+          Tap below to open your phone's share menu, then select <strong>Instagram Stories</strong> to post with camera tags active!
         </p>
         
-        {/* Main Share Button */}
+        {/* Main Share Button with Gradient & Spring Response */}
         <button
           type="button"
           onClick={handleShareToInstagram}
-          className="w-full h-13 flex items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 hover:opacity-95 text-white font-bold text-base shadow-xl shadow-purple-600/30 active:scale-[0.98] transition-all"
+          className="w-full h-14 flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 hover:opacity-95 text-white font-bold text-base shadow-xl shadow-purple-600/30 active:scale-[0.98] transition-all cursor-pointer"
         >
           <Share2 className="w-5 h-5" />
-          {shared ? 'Opening Share Menu...' : 'Share Directly to Instagram Stories'}
+          <span>{shared ? 'Opening Share Menu...' : 'Share Directly to Instagram Stories'}</span>
         </button>
       </div>
 
       {/* Embedded Metadata Verification Card */}
-      <div className="w-full max-w-xl bg-[#141414] rounded-2xl p-4 border border-[#222] shadow-lg space-y-3">
-        <div className="flex items-center justify-between border-b border-[#222] pb-2.5">
-          <span className="text-xs font-semibold text-white flex items-center gap-1.5">
+      <div className="w-full max-w-xl glass-panel rounded-3xl p-5 border border-white/[0.08] shadow-xl space-y-3.5">
+        <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
+          <span className="text-xs font-semibold text-white flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            Embedded Hardware Profile
+            Verified Hardware Metadata
           </span>
-          <span className="text-[11px] font-mono text-indigo-400 font-medium">
-            {processedImage.profileName || 'Ray-Ban Meta'}
+          <span className="text-[11px] font-mono text-indigo-400 font-medium bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20">
+            {processedImage.profileName || 'Ray-Ban Meta Gen 2'}
           </span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          <div className="bg-[#1c1c1c] rounded-lg p-2 text-center">
-            <div className="text-[10px] text-zinc-500 uppercase">Device</div>
-            <div className="text-xs font-medium text-zinc-200 truncate">Ray-Ban Meta 2</div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <div className="bg-white/[0.03] rounded-xl p-2.5 text-center border border-white/[0.05]">
+            <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold">Device</div>
+            <div className="text-xs font-semibold text-zinc-200 truncate mt-0.5">Ray-Ban Meta 2</div>
           </div>
-          <div className="bg-[#1c1c1c] rounded-lg p-2 text-center">
-            <div className="text-[10px] text-zinc-500 uppercase">Make Tag</div>
-            <div className="text-xs font-medium text-zinc-200 truncate">Meta AI</div>
+          <div className="bg-white/[0.03] rounded-xl p-2.5 text-center border border-white/[0.05]">
+            <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold">Make Tag</div>
+            <div className="text-xs font-semibold text-zinc-200 truncate mt-0.5">Meta AI</div>
           </div>
-          <div className="bg-[#1c1c1c] rounded-lg p-2 text-center">
-            <div className="text-[10px] text-zinc-500 uppercase">Sensor</div>
-            <div className="text-xs font-medium text-emerald-400">12MP Ultra-wide</div>
+          <div className="bg-white/[0.03] rounded-xl p-2.5 text-center border border-white/[0.05]">
+            <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold">Sensor</div>
+            <div className="text-xs font-semibold text-emerald-400 mt-0.5">12MP Ultra-wide</div>
           </div>
-          <div className="bg-[#1c1c1c] rounded-lg p-2 text-center">
-            <div className="text-[10px] text-zinc-500 uppercase">Spin View</div>
-            <div className="text-xs font-medium text-emerald-400">Active</div>
+          <div className="bg-white/[0.03] rounded-xl p-2.5 text-center border border-white/[0.05]">
+            <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold">Spin View</div>
+            <div className="text-xs font-semibold text-emerald-400 mt-0.5 flex items-center justify-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Active
+            </div>
           </div>
+        </div>
+
+        <div className="flex items-center justify-center gap-2 pt-1 text-[11px] text-zinc-500">
+          <ShieldCheck className="w-3.5 h-3.5 text-indigo-400" />
+          <span>Processed 100% locally in your browser • Zero server uploads</span>
         </div>
       </div>
 
-      {/* Secondary Actions */}
-      <div className="w-full max-w-xl flex flex-col sm:flex-row gap-3">
+      {/* Secondary Action Buttons */}
+      <div className="w-full max-w-xl flex flex-col sm:flex-row gap-3 pt-1">
         <Button 
           variant="secondary" 
-          size="md" 
+          size="lg" 
           onClick={handleDownload} 
-          icon={downloaded ? <Check className="w-4 h-4" /> : <Download className="w-4 h-4" />}
-          className="flex-1 h-11 rounded-xl text-zinc-300"
+          icon={downloaded ? <Check className="w-4 h-4 text-emerald-400" /> : <Download className="w-4 h-4" />}
+          className="flex-1 h-12 rounded-2xl text-zinc-200 font-medium"
         >
           {downloaded ? 'Saved to Device!' : 'Save Backup to Device'}
         </Button>
 
         <Button 
-          variant="secondary" 
-          size="md" 
+          variant="glow" 
+          size="lg" 
           onClick={onCreateAnother} 
           icon={<Plus className="w-4 h-4" />}
-          className="flex-1 h-11 rounded-xl text-zinc-300"
+          className="flex-1 h-12 rounded-2xl font-medium"
         >
           Convert Another Photo
         </Button>
@@ -148,3 +161,5 @@ export function ResultView({ processedImage, onCreateAnother }: ResultViewProps)
     </div>
   );
 }
+
+export default ResultView;

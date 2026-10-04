@@ -1,9 +1,49 @@
 import { Helmet } from 'react-helmet-async';
-import { Upload, Sliders, Settings, Download, Share2, ShieldCheck } from 'lucide-react';
+import { Upload, Sliders, Settings, Download, Share2, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router';
 import { pageMeta } from '@/seo/metadata';
 import { AdSlot } from '@/components/layout/AdSlot';
+import { Button } from '@/components/ui/Button';
 
 export function HowItWorksPage() {
+  const steps = [
+    {
+      num: "01",
+      title: "Upload Your Photo",
+      desc: "Drag and drop any photo into the converter, or tap to choose from your phone gallery or camera. Supports JPG, PNG, WEBP, and Apple HEIC.",
+      icon: Upload,
+      accent: "text-indigo-400 bg-indigo-500/10 border-indigo-500/20",
+    },
+    {
+      num: "02",
+      title: "Frame & Crop (3:4)",
+      desc: "Apply the standard 3:4 Ray-Ban Meta aspect ratio preset, fine-tune zoom on your focal point, and adjust rotation with single-tap controls.",
+      icon: Sliders,
+      accent: "text-purple-400 bg-purple-500/10 border-purple-500/20",
+    },
+    {
+      num: "03",
+      title: "Local Metadata Injection",
+      desc: "Tap 'Generate Meta Photo'. The tool processes the canvas in your browser, injecting Ray-Ban Meta Gen 2 EXIF and XMP tags without server round-trips.",
+      icon: Settings,
+      accent: "text-pink-400 bg-pink-500/10 border-pink-500/20",
+    },
+    {
+      num: "04",
+      title: "Direct Instagram Sharing",
+      desc: "On mobile, tap 'Share Directly to Instagram Stories' to open your phone's native share sheet. Instagram detects the embedded metadata automatically.",
+      icon: Share2,
+      accent: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
+    },
+    {
+      num: "05",
+      title: "Save High-Res Backup",
+      desc: "Download an uncompressed copy at 3024 × 4032 resolution directly to your camera roll for safekeeping or reposting anytime.",
+      icon: Download,
+      accent: "text-cyan-400 bg-cyan-500/10 border-cyan-500/20",
+    },
+  ];
+
   return (
     <>
       <Helmet>
@@ -11,122 +51,85 @@ export function HowItWorksPage() {
         <meta name="description" content={pageMeta.howItWorks.description} />
       </Helmet>
 
-      <div className="w-full max-w-4xl mx-auto py-12 sm:py-16 px-4 sm:px-6">
-        <div className="text-center mb-12 sm:mb-16">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 tracking-tight">How MetaShot Works</h1>
-          <p className="text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-            A simple, private, and fast way to prepare your photos for social media.
-            Everything happens right here in your browser.
+      <div className="relative w-full max-w-4xl mx-auto py-12 sm:py-20 px-4 sm:px-6 overflow-hidden">
+        {/* Ambient Glow */}
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none -z-10" />
+
+        {/* Page Header */}
+        <div className="text-center mb-12 sm:mb-16 max-w-2xl mx-auto">
+          <span className="text-xs uppercase tracking-widest text-indigo-400 font-semibold mb-2 block">
+            Step-by-Step Guide
+          </span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
+            How MetaShot Works
+          </h1>
+          <p className="text-base sm:text-lg text-zinc-400 leading-relaxed">
+            Fast, secure, and entirely client-side. See how your images are formatted and tagged for Instagram Stories in seconds.
           </p>
         </div>
 
         {/* Ad Slot 1 */}
-        <AdSlot slot="how-ad-1" size="md" className="mb-12" />
+        <AdSlot slot="how-ad-1" size="md" className="mb-14" />
 
-        <div className="relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-[#333] before:to-transparent">
-          {/* Step 1 */}
-          <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-            <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0a0a] bg-indigo-500 text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
-              1
-            </div>
-            <div className="w-[calc(100%-3.5rem)] md:w-[calc(50%-2.5rem)] p-6 bg-[#141414] rounded-2xl border border-[#242424]">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 bg-[#222] rounded-xl">
-                  <Upload className="w-5 h-5 text-indigo-400" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white">Upload Your Photo</h3>
-              </div>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Drag and drop your photo into the converter, or tap to choose from your gallery or camera. Supports JPG, PNG, WEBP, and HEIC.
-              </p>
-            </div>
-          </div>
+        {/* Inspira Timeline */}
+        <div className="relative space-y-8 before:absolute before:inset-0 before:left-5 md:before:left-1/2 before:-translate-x-px before:h-full before:w-0.5 before:bg-gradient-to-b before:from-indigo-500/50 before:via-purple-500/30 before:to-transparent">
+          {steps.map((step, idx) => {
+            const Icon = step.icon;
+            const isEven = idx % 2 === 1;
 
-          {/* Step 2 */}
-          <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-            <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0a0a] bg-indigo-500 text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
-              2
-            </div>
-            <div className="w-[calc(100%-3.5rem)] md:w-[calc(50%-2.5rem)] p-6 bg-[#141414] rounded-2xl border border-[#242424]">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 bg-[#222] rounded-xl">
-                  <Sliders className="w-5 h-5 text-indigo-400" />
+            return (
+              <div 
+                key={step.num}
+                className={`relative flex items-start md:items-center justify-between md:justify-normal group ${
+                  isEven ? 'md:flex-row-reverse' : ''
+                }`}
+              >
+                {/* Timeline Node */}
+                <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-indigo-400 bg-[#09090b] text-indigo-400 font-bold text-xs shadow-lg shadow-indigo-500/20 shrink-0 md:order-1 md:-translate-x-1/2 z-10 transition-transform group-hover:scale-110">
+                  {step.num}
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white">Edit & Adjust</h3>
-              </div>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Use our mobile-friendly editor to crop with social presets (1:1, 4:5, 9:16), zoom into key areas, and rotate with 1 tap.
-              </p>
-            </div>
-          </div>
 
-          {/* Step 3 */}
-          <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-            <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0a0a] bg-indigo-500 text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
-              3
-            </div>
-            <div className="w-[calc(100%-3.5rem)] md:w-[calc(50%-2.5rem)] p-6 bg-[#141414] rounded-2xl border border-[#242424]">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 bg-[#222] rounded-xl">
-                  <Settings className="w-5 h-5 text-indigo-400" />
+                {/* Content Card */}
+                <div className={`w-[calc(100%-3.5rem)] md:w-[calc(50%-2.5rem)] glass-panel-interactive rounded-3xl p-6 sm:p-7 border border-white/[0.08] ${
+                  isEven ? 'md:mr-auto' : 'md:ml-auto'
+                }`}>
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`p-2.5 rounded-xl border ${step.accent}`}>
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block font-semibold">Step {step.num}</span>
+                      <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight">{step.title}</h2>
+                    </div>
+                  </div>
+                  <p className="text-zinc-400 text-sm leading-relaxed">
+                    {step.desc}
+                  </p>
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white">Process Locally</h3>
               </div>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Tap "Process Photo". The browser converts the image on your device at maximum visual quality and preserves metadata cleanly.
-              </p>
-            </div>
-          </div>
-
-          {/* Step 4 */}
-          <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-            <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0a0a] bg-indigo-500 text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
-              4
-            </div>
-            <div className="w-[calc(100%-3.5rem)] md:w-[calc(50%-2.5rem)] p-6 bg-[#141414] rounded-2xl border border-[#242424]">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 bg-[#222] rounded-xl">
-                  <Download className="w-5 h-5 text-indigo-400" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white">Download or Share</h3>
-              </div>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Preview your processed photo, check file specs, and save directly to your phone or share straight to Instagram with 1 tap.
-              </p>
-            </div>
-          </div>
-
-          {/* Step 5 */}
-          <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-            <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0a0a] bg-indigo-500 text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
-              5
-            </div>
-            <div className="w-[calc(100%-3.5rem)] md:w-[calc(50%-2.5rem)] p-6 bg-[#141414] rounded-2xl border border-[#242424]">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 bg-[#222] rounded-xl">
-                  <Share2 className="w-5 h-5 text-indigo-400" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white">Post to Instagram</h3>
-              </div>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Upload your perfectly formatted photo to Instagram without any quality degradation or loss of metadata.
-              </p>
-            </div>
-          </div>
+            );
+          })}
         </div>
 
-        {/* Privacy Callout */}
-        <div className="mt-16 p-6 sm:p-8 rounded-2xl bg-indigo-950/20 border border-indigo-500/20 text-center">
-          <ShieldCheck className="w-10 h-10 text-indigo-400 mx-auto mb-3" />
-          <h2 className="text-xl font-bold text-white mb-2">100% On-Device Processing</h2>
-          <p className="text-zinc-300 text-sm max-w-xl mx-auto leading-relaxed">
-            Unlike other online file converters, MetaShot never uploads your photos to any remote server. 
-            All operations use your browser's local processing power.
+        {/* 100% On-Device Privacy Guarantee Callout */}
+        <div className="mt-20 p-8 sm:p-10 rounded-3xl glass-panel border border-emerald-500/30 text-center relative overflow-hidden shadow-2xl">
+          <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mx-auto mb-4">
+            <ShieldCheck className="w-7 h-7" />
+          </div>
+          <h2 className="text-2xl font-bold text-white mb-2">100% In-Browser Guarantee</h2>
+          <p className="text-zinc-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-6">
+            Unlike remote file converters, MetaShot executes entirely inside your device's browser memory. Your personal photos are never transferred, processed, or stored on external servers.
           </p>
+          <Link to="/converter">
+            <Button variant="glow" size="lg" className="rounded-2xl h-12 px-7">
+              <span>Try MetaShot Now</span>
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          </Link>
         </div>
         
         {/* Ad Slot 2 */}
-        <div className="mt-12">
+        <div className="mt-14">
           <AdSlot slot="how-ad-2" size="banner" />
         </div>
       </div>

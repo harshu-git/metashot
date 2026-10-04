@@ -1,47 +1,74 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  --color-surface-primary: #0a0a0a;
-  --color-surface-elevated: #111111;
-  --color-surface-card: #1a1a1a;
-  --color-surface-input: #222222;
+  --color-surface-primary: #09090b;
+  --color-surface-elevated: #111116;
+  --color-surface-card: #18181f;
+  --color-surface-input: #20202a;
 
-  --color-border-subtle: #1a1a1a;
-  --color-border-default: #2a2a2a;
-  --color-border-emphasis: #333333;
+  --color-border-subtle: rgba(255, 255, 255, 0.07);
+  --color-border-default: rgba(255, 255, 255, 0.12);
+  --color-border-emphasis: rgba(255, 255, 255, 0.2);
 
   --color-accent: #6366f1;
   --color-accent-hover: #818cf8;
-  --color-accent-muted: #6366f120;
+  --color-accent-muted: rgba(99, 102, 241, 0.15);
 }
 
-/* Global styles */
+/* ==========================================================================
+   Lenis Smooth Scrolling System (Inertial Momentum)
+   ========================================================================== */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Global Standards & Typography
+   ========================================================================== */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #333 #0a0a0a;
+  scrollbar-color: rgba(255, 255, 255, 0.15) #09090b;
   -webkit-tap-highlight-color: transparent;
 }
 
 ::selection {
-  background-color: #6366f140;
-  color: white;
+  background-color: rgba(99, 102, 241, 0.35);
+  color: #ffffff;
 }
 
 html, body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #0a0a0a;
-  color: #ffffff;
+  background-color: #09090b;
+  color: #f4f4f5;
   touch-action: manipulation;
   overscroll-behavior-y: none;
 }
 
-/* Smooth page transitions */
-html {
-  scroll-behavior: smooth;
+/* Accessible High-Contrast Focus Rings */
+:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 2px;
 }
 
 /* Hide scrollbar for Chrome, Safari */
@@ -51,35 +78,126 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #09090b;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: rgba(255, 255, 255, 0.25);
 }
 
-/* Image crop area styling override for smooth mobile touch */
+/* ==========================================================================
+   Inspira UI & Animate UI Aesthetic Utilities
+   ========================================================================== */
+
+/* Luminous Glass Panels */
+.glass-panel {
+  background: rgba(18, 18, 23, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+}
+
+.glass-panel-interactive {
+  background: rgba(20, 20, 26, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              background-color 0.25s ease,
+              box-shadow 0.25s ease;
+  will-change: transform, border-color;
+}
+
+.glass-panel-interactive:hover {
+  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.4);
+  background: rgba(24, 24, 32, 0.85);
+  box-shadow: 0 16px 32px -10px rgba(99, 102, 241, 0.15),
+              0 0 0 1px rgba(99, 102, 241, 0.25);
+}
+
+/* Gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 30%, rgba(255, 255, 255, 0.65) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-indigo {
+  background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Ambient Radial Glow Background */
+.bg-radial-glow {
+  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15) 0%, rgba(9, 9, 11, 0) 70%);
+}
+
+.bg-radial-mesh {
+  background-image: 
+    radial-gradient(circle at 50% -10%, rgba(99, 102, 241, 0.18) 0%, rgba(9, 9, 11, 0) 60%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
+}
+
+/* Shimmer Button Effect */
+@keyframes shimmerSweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  animation: shimmerSweep 3s infinite;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Cropper & Range Sliders
+   ========================================================================== */
 .reactEasyCrop_Container {
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   touch-action: none !important;
   user-select: none !important;
   -webkit-user-select: none !important;
 }
 
 .reactEasyCrop_CropArea {
-  box-shadow: 0 0 0 9999em rgba(0, 0, 0, 0.75) !important;
+  box-shadow: 0 0 0 9999em rgba(9, 9, 11, 0.85) !important;
+  border: 2px solid rgba(129, 140, 248, 0.9) !important;
+  border-radius: 0.75rem;
 }
 
-/* Touch-friendly range sliders for Android & iOS */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
-  background: #222;
+  background: #1f1f26;
   border-radius: 9999px;
   height: 8px;
   outline: none;
@@ -93,13 +211,12 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 50%;
   background: #6366f1;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  border: 2px solid #ffffff;
-  transition: transform 0.1s ease, background-color 0.15s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(255, 255, 255, 0.9);
+  transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
 input[type="range"]:active::-webkit-slider-thumb {
-  transform: scale(1.2);
+  transform: scale(1.15);
   background: #818cf8;
 }
 
@@ -109,6 +226,20 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 50%;
   background: #6366f1;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(255, 255, 255, 0.9);
+  border: none;
+}
+
+/* ==========================================================================
+   Accessibility: Reduced Motion Gate Compliance
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

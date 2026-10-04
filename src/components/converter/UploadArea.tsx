@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Upload, Image as ImageIcon, Sparkles } from 'lucide-react';
+import { Image as ImageIcon, Sparkles, ShieldCheck, AlertCircle } from 'lucide-react';
 import type { ImageFile } from '../../types';
 import { isValidImageType, isFileTooLarge, getImageDimensions, MAX_FILE_SIZE_MB } from '../../utils/helpers';
 import { Button } from '../ui/Button';
@@ -106,18 +106,21 @@ export function UploadArea({ onFileSelected }: UploadAreaProps) {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col items-center gap-4">
       <div 
-        className={`w-full min-h-[280px] sm:min-h-[340px] md:min-h-[400px] flex flex-col items-center justify-center rounded-2xl border-2 border-dashed transition-all duration-200 cursor-pointer p-6 sm:p-10 active:scale-[0.99] touch-manipulation
+        className={`w-full min-h-[300px] sm:min-h-[360px] md:min-h-[420px] flex flex-col items-center justify-center rounded-3xl border-2 border-dashed transition-all duration-300 cursor-pointer p-6 sm:p-12 relative overflow-hidden group touch-manipulation
           ${isDragging 
-            ? 'bg-indigo-950/20 border-indigo-500 scale-[1.01]' 
-            : 'bg-[#111]/80 border-[#2a2a2a] hover:border-indigo-500/50 hover:bg-[#151515]'}`}
+            ? 'bg-indigo-950/30 border-indigo-400 scale-[1.01] shadow-2xl shadow-indigo-500/20' 
+            : 'bg-[#111116]/80 border-white/[0.12] hover:border-indigo-500/50 hover:bg-[#14141c] shadow-xl'}`}
         onDragEnter={handleDragEnter}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={() => fileInputRef.current?.click()}
       >
+        {/* Subtle background radial glow */}
+        <div className="absolute inset-0 bg-radial-glow opacity-60 pointer-events-none group-hover:opacity-100 transition-opacity" />
+
         <input 
           type="file" 
           ref={fileInputRef}
@@ -127,49 +130,68 @@ export function UploadArea({ onFileSelected }: UploadAreaProps) {
         />
         
         {error ? (
-          <div className="flex flex-col items-center text-center space-y-4">
-            <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 mb-2">
-              <Upload className="w-8 h-8" />
+          <div className="flex flex-col items-center text-center space-y-4 relative z-10">
+            <div className="w-16 h-16 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 mb-1">
+              <AlertCircle className="w-8 h-8" />
             </div>
             <div>
-              <h3 className="text-xl font-medium text-white mb-1">Upload Failed</h3>
-              <p className="text-red-400 text-sm max-w-sm">{error}</p>
+              <h3 className="text-xl font-semibold text-white mb-1">Unable to Load Image</h3>
+              <p className="text-red-400/90 text-sm max-w-sm">{error}</p>
             </div>
             <Button variant="secondary" size="md" onClick={(e) => { e.stopPropagation(); setError(null); }}>
-              Try Again
+              Select Another Photo
             </Button>
           </div>
         ) : (
-          <div className="flex flex-col items-center text-center space-y-4 pointer-events-none">
-            <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center transition-colors duration-200 shadow-inner
-              ${isDragging ? 'bg-indigo-500 text-white shadow-indigo-500/30' : 'bg-[#1e1e1e] text-indigo-400 border border-[#2e2e2e]'}`}>
+          <div className="flex flex-col items-center text-center space-y-5 relative z-10 pointer-events-none">
+            {/* Animated Icon Container */}
+            <div className={`w-20 h-20 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xl
+              ${isDragging 
+                ? 'bg-gradient-to-br from-indigo-500 to-indigo-600 text-white scale-110 shadow-indigo-500/40' 
+                : 'bg-[#181820] text-indigo-400 border border-white/[0.08] group-hover:border-indigo-500/40 group-hover:scale-105'}`}>
               {isLoadingFile ? (
-                <div className="w-8 h-8 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin" />
+                <div className="w-9 h-9 border-3 border-indigo-400 border-t-transparent rounded-full animate-spin" />
               ) : (
-                <ImageIcon className="w-8 h-8 sm:w-10 sm:h-10" />
+                <ImageIcon className="w-10 h-10" />
               )}
             </div>
             
-            <div className="space-y-1">
-              <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-tight">
-                {isLoadingFile ? 'Loading photo...' : 'Select your photo'}
+            <div className="space-y-1.5 max-w-md">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                {isLoadingFile ? 'Decoding photo in browser...' : 'Choose your photo'}
               </h3>
-              <p className="text-zinc-400 text-sm sm:text-base">
-                Tap to browse from gallery or camera
-              </p>
-              <p className="text-zinc-500 text-xs sm:text-sm pt-1">
-                Supports JPG, PNG, WEBP, HEIC (up to {MAX_FILE_SIZE_MB}MB)
+              <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+                Tap anywhere to browse from gallery or camera roll
               </p>
             </div>
 
+            {/* Format Tags */}
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-1 text-xs">
+              {['JPG', 'PNG', 'WEBP', 'Apple HEIC'].map((format) => (
+                <span 
+                  key={format}
+                  className="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.06] text-zinc-400 font-medium"
+                >
+                  {format}
+                </span>
+              ))}
+            </div>
+
+            {/* Visual Action Button */}
             <div className="pt-2">
-              <span className="inline-flex items-center gap-2 bg-indigo-600/90 text-white text-sm font-medium px-5 py-2.5 rounded-xl shadow-lg shadow-indigo-500/20">
-                <Sparkles className="w-4 h-4" />
-                Choose Photo
+              <span className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-500 text-white text-sm sm:text-base font-semibold px-6 py-3 rounded-2xl shadow-xl shadow-indigo-500/30 group-hover:shadow-indigo-500/50 group-hover:scale-[1.02] transition-all">
+                <Sparkles className="w-4 h-4 text-indigo-200" />
+                <span>Select Photo</span>
               </span>
             </div>
           </div>
         )}
+      </div>
+
+      {/* Trust & Privacy Badge */}
+      <div className="flex items-center gap-2 text-xs text-zinc-500">
+        <ShieldCheck className="w-4 h-4 text-emerald-400" />
+        <span>100% On-Device Processing. No photos are uploaded to any server.</span>
       </div>
     </div>
   );

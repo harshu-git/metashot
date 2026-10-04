@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
-import { Aperture, Menu, X, ArrowRight } from 'lucide-react';
+import { Aperture, Menu, X, ArrowRight, Sparkles } from 'lucide-react';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,52 +36,74 @@ export function Header() {
 
   const navLinks = [
     { path: '/', label: 'Home' },
-    { path: '/converter', label: 'Photo Converter' },
+    { path: '/converter', label: 'Photo Tool' },
     { path: '/how-it-works', label: 'How It Works' },
     { path: '/faq', label: 'FAQ' },
   ];
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-[#1a1a1a]">
+      <header className="sticky top-0 z-40 w-full bg-[#09090b]/85 backdrop-blur-2xl border-b border-white/[0.07] transition-colors">
         <div className="container mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           {/* Brand Logo & Author */}
-          <Link to="/" className="flex items-center gap-2 group" onClick={closeMenu}>
-            <Aperture className="w-6 h-6 text-indigo-400 group-hover:text-indigo-300 transition-colors shrink-0" />
+          <Link 
+            to="/" 
+            className="flex items-center gap-2.5 group cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-400 rounded-lg p-1" 
+            onClick={closeMenu}
+          >
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500/20 via-indigo-500/10 to-transparent border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:text-indigo-300 group-hover:border-indigo-400/50 transition-all shadow-sm">
+              <Aperture className="w-5 h-5 transition-transform duration-300 group-hover:rotate-45" />
+            </div>
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-2">
-              <span className="text-xl font-bold text-white tracking-tight">MetaShot</span>
-              <span className="text-[11px] font-medium text-indigo-400/90 whitespace-nowrap">by Harsh Shrimali</span>
+              <span className="text-lg sm:text-xl font-bold text-white tracking-tight group-hover:text-zinc-100 transition-colors">
+                MetaShot
+              </span>
+              <span className="text-[11px] font-medium text-indigo-400/90 whitespace-nowrap flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                by Harsh Shrimali
+              </span>
             </div>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`text-sm font-medium transition-colors ${
-                  location.pathname === link.path ? 'text-white' : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              to="/converter"
-              className="bg-indigo-500 hover:bg-indigo-400 text-white text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200 shadow-md shadow-indigo-500/20"
-            >
-              Upload Photo
-            </Link>
+          <nav className="hidden md:flex items-center gap-1.5 bg-[#121217]/70 p-1.5 rounded-2xl border border-white/[0.06] shadow-inner">
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.path;
+              return (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`text-sm font-medium px-4 py-1.5 rounded-xl transition-all duration-150 outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 ${
+                    isActive 
+                      ? 'bg-white/[0.08] text-white shadow-sm font-semibold' 
+                      : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Desktop Action CTA */}
+          <div className="hidden md:flex items-center gap-3">
+            <Link
+              to="/converter"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-400 hover:to-indigo-500 text-white text-sm font-semibold px-4.5 py-2 rounded-xl transition-all duration-200 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 active:scale-[0.98] outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+            >
+              <Sparkles className="w-4 h-4 text-indigo-200" />
+              <span>Upload Photo</span>
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button (44px min touch target) */}
           <button
-            className="md:hidden p-2 text-zinc-400 hover:text-white transition-colors"
+            type="button"
+            className="md:hidden w-11 h-11 flex items-center justify-center text-zinc-400 hover:text-white bg-[#14141a] hover:bg-[#1a1a24] rounded-xl border border-white/[0.08] transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
             onClick={() => setIsMenuOpen(true)}
-            aria-label="Open menu"
+            aria-label="Open navigation menu"
           >
-            <Menu className="w-6 h-6" />
+            <Menu className="w-5 h-5" />
           </button>
         </div>
       </header>
@@ -93,55 +115,62 @@ export function Header() {
           style={{ backgroundColor: '#09090b' }}
         >
           {/* Top Bar */}
-          <div className="h-16 px-4 sm:px-6 flex items-center justify-between border-b border-[#222] bg-[#09090b] shrink-0">
-            <Link to="/" className="flex items-center gap-2" onClick={closeMenu}>
-              <Aperture className="w-6 h-6 text-indigo-400 shrink-0" />
+          <div className="h-16 px-4 sm:px-6 flex items-center justify-between border-b border-white/[0.08] bg-[#09090b] shrink-0">
+            <Link to="/" className="flex items-center gap-2.5" onClick={closeMenu}>
+              <div className="w-9 h-9 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+                <Aperture className="w-5 h-5" />
+              </div>
               <div className="flex items-baseline gap-2">
                 <span className="text-xl font-bold text-white tracking-tight">MetaShot</span>
                 <span className="text-xs font-medium text-indigo-400">by Harsh Shrimali</span>
               </div>
             </Link>
             <button
-              className="p-2 text-zinc-400 hover:text-white bg-[#18181b] rounded-lg border border-[#27272a] transition-colors"
+              type="button"
+              className="w-10 h-10 flex items-center justify-center text-zinc-400 hover:text-white bg-[#16161d] rounded-xl border border-white/[0.08] transition-colors cursor-pointer"
               onClick={closeMenu}
               aria-label="Close menu"
             >
-              <X className="w-6 h-6 text-white" />
+              <X className="w-5 h-5 text-white" />
             </button>
           </div>
 
           {/* Nav Links */}
-          <div className="flex-1 flex flex-col px-6 py-8 gap-3 bg-[#09090b]">
+          <div className="flex-1 flex flex-col px-5 py-8 gap-3 bg-[#09090b]">
             <span className="text-xs uppercase tracking-widest text-zinc-500 font-semibold mb-2">
               Navigation
             </span>
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`flex items-center justify-between px-4 py-3.5 rounded-xl border text-lg font-semibold transition-all ${
-                  location.pathname === link.path 
-                    ? 'bg-indigo-500/10 border-indigo-500/30 text-indigo-400' 
-                    : 'bg-[#121215] border-[#1e1e24] text-zinc-200 hover:text-white'
-                }`}
-                onClick={closeMenu}
-              >
-                <span>{link.label}</span>
-                <ArrowRight className="w-4 h-4 opacity-60" />
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.path;
+              return (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`flex items-center justify-between px-4 py-3.5 rounded-xl border text-base font-semibold transition-all min-h-[48px] ${
+                    isActive 
+                      ? 'bg-indigo-500/10 border-indigo-500/35 text-indigo-400 shadow-sm' 
+                      : 'bg-[#121217] border-white/[0.06] text-zinc-200 hover:text-white hover:bg-[#16161e]'
+                  }`}
+                  onClick={closeMenu}
+                >
+                  <span>{link.label}</span>
+                  <ArrowRight className="w-4 h-4 opacity-50" />
+                </Link>
+              );
+            })}
 
             <Link
               to="/converter"
-              className="mt-6 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:opacity-95 text-white text-center text-base font-bold py-4 rounded-xl shadow-xl shadow-indigo-600/30 active:scale-[0.98] transition-all"
+              className="mt-6 flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 via-indigo-600 to-violet-600 hover:opacity-95 text-white text-center text-base font-bold py-4 rounded-xl shadow-xl shadow-indigo-600/30 active:scale-[0.98] transition-all min-h-[52px]"
               onClick={closeMenu}
             >
-              Upload & Convert Photo
+              <Sparkles className="w-5 h-5 text-indigo-200" />
+              <span>Upload & Convert Photo</span>
             </Link>
           </div>
 
           {/* Footer inside mobile menu */}
-          <div className="p-6 border-t border-[#1e1e24] bg-[#0c0c0e] text-center text-xs text-zinc-500 shrink-0">
+          <div className="p-6 border-t border-white/[0.08] bg-[#0c0c10] text-center text-xs text-zinc-500 shrink-0">
             © {new Date().getFullYear()} MetaShot by Harsh Shrimali. All rights reserved.
           </div>
         </div>

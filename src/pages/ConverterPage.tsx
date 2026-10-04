@@ -8,6 +8,7 @@ import { AdSlot } from '../components/layout/AdSlot';
 import type { EditorState, ImageFile, ProcessingOptions, ProcessedImage } from '@/types';
 import { processImage } from '@/services/imageProcessor';
 import { createImageFromUrl } from '@/utils/helpers';
+import { AlertCircle } from 'lucide-react';
 
 export default function ConverterPage() {
   const [state, setState] = useState<EditorState>('idle');
@@ -95,14 +96,17 @@ export default function ConverterPage() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#0a0a0a] py-8 sm:py-16 px-4 sm:px-6">
+    <div className="relative w-full min-h-[85vh] py-8 sm:py-14 px-4 sm:px-6 overflow-hidden">
       <Helmet>
         <title>Photo Converter — MetaShot</title>
-        <meta name="description" content="Process and optimize your photos for Instagram with MetaShot's browser-based converter. No uploads, no accounts needed." />
+        <meta name="description" content="Process and optimize your photos for Instagram Stories with MetaShot's browser-based converter. Ray-Ban Meta tags, 3:4 framing, 100% private." />
       </Helmet>
 
+      {/* Ambient Radial Background Glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-indigo-600/10 rounded-full blur-[130px] pointer-events-none -z-10" />
+
       <div className="max-w-4xl mx-auto space-y-8">
-        {/* Ad Slot 1 (Top) */}
+        {/* Top Ad Slot */}
         <AdSlot slot="converter-ad-top" size="md" />
 
         {state === 'idle' && (
@@ -112,8 +116,9 @@ export default function ConverterPage() {
         {(state === 'editing' || state === 'processing') && imageFile && (
           <div className="relative">
             {error && (
-              <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-center">
-                {error}
+              <div className="mb-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center justify-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{error}</span>
               </div>
             )}
             
@@ -135,7 +140,7 @@ export default function ConverterPage() {
           />
         )}
 
-        {/* Ad Slot 2 (Bottom) */}
+        {/* Bottom Ad Slot */}
         <AdSlot slot="converter-ad-bottom" size="banner" />
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
-import { ArrowLeft, RotateCcw, RotateCw, Sparkles, ZoomIn, ZoomOut, RefreshCw, Glasses, Check } from 'lucide-react';
+import { ArrowLeft, RotateCcw, RotateCw, Sparkles, ZoomIn, ZoomOut, RefreshCw, Glasses, Check, SlidersHorizontal, Image as ImageIcon } from 'lucide-react';
 import type { ImageFile, ProcessingOptions, CropArea } from '../../types';
 import { CROP_PRESETS, DEFAULT_QUALITY } from '../../utils/helpers';
 import { META_PROFILES } from '../../services/metadataProcessor';
@@ -53,23 +53,30 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
 
   return (
     <div className="w-full flex flex-col space-y-4 sm:space-y-6">
-      {/* File Info Bar */}
-      <div className="flex justify-between items-center bg-[#141414] px-4 py-2.5 rounded-xl border border-[#222] text-xs sm:text-sm text-zinc-400">
-        <span className="truncate max-w-[55%] font-medium text-zinc-300">{imageFile.name}</span>
+      {/* File Info Glass Bar */}
+      <div className="flex justify-between items-center glass-panel px-4 py-2.5 rounded-2xl border border-white/[0.08] text-xs sm:text-sm text-zinc-300">
+        <div className="flex items-center gap-2 truncate max-w-[60%]">
+          <ImageIcon className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+          <span className="truncate font-medium text-zinc-200">{imageFile.name}</span>
+        </div>
         <div className="flex items-center gap-3 shrink-0">
-          <span>{imageFile.width} × {imageFile.height}</span>
+          <span className="font-mono text-zinc-400 text-xs bg-white/[0.04] px-2 py-0.5 rounded-md border border-white/[0.05]">
+            {imageFile.width} × {imageFile.height}
+          </span>
           <button
+            type="button"
             onClick={handleReset}
-            className="text-zinc-400 hover:text-white p-1 rounded hover:bg-[#222] transition-colors"
+            className="text-zinc-400 hover:text-white p-1.5 rounded-lg hover:bg-white/[0.08] active:scale-90 transition-all"
             title="Reset crop & rotation"
+            aria-label="Reset crop and rotation"
           >
             <RefreshCw className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>
       
-      {/* Cropper Container - Optimized for mobile viewport */}
-      <div className="relative w-full h-[38vh] min-h-[260px] max-h-[460px] md:h-[450px] rounded-2xl overflow-hidden bg-[#0d0d0d] border border-[#222] touch-none">
+      {/* Cropper Container - Inspira Framed Studio View */}
+      <div className="relative w-full h-[40vh] min-h-[280px] max-h-[480px] md:h-[460px] rounded-2xl overflow-hidden bg-[#070709] border border-white/[0.08] shadow-2xl touch-none group">
         <Cropper
           image={imageFile.previewUrl}
           crop={crop}
@@ -82,89 +89,120 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
           onCropComplete={(_, croppedAreaPixels) => setCroppedAreaPixels(croppedAreaPixels)}
           classes={{ containerClassName: 'rounded-2xl' }}
           style={{
-            containerStyle: { background: '#0d0d0d' },
-            cropAreaStyle: { border: '2px solid rgba(99, 102, 241, 0.8)', borderRadius: '8px' }
+            containerStyle: { background: '#070709' },
+            cropAreaStyle: { 
+              border: '2px solid rgba(129, 140, 248, 0.9)', 
+              borderRadius: '12px',
+              boxShadow: '0 0 0 9999px rgba(0, 0, 0, 0.65), 0 0 25px rgba(99, 102, 241, 0.35)'
+            }
           }}
         />
+        
+        {/* Subtle Orientation Watermark */}
+        <div className="absolute bottom-3 right-3 pointer-events-none z-10 hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[11px] text-zinc-300 font-mono">
+          <Glasses className="w-3 h-3 text-indigo-400" />
+          <span>Meta 3:4 Viewport</span>
+        </div>
       </div>
       
-      {/* Controls Card */}
-      <div className="bg-[#141414] rounded-2xl p-4 sm:p-6 flex flex-col space-y-5 border border-[#222] shadow-xl">
+      {/* Inspira Controls Studio Card */}
+      <div className="glass-panel rounded-2xl p-5 sm:p-7 flex flex-col space-y-6 border border-white/[0.08] shadow-2xl">
         
         {/* Meta Device Profile Selector */}
-        <div className="flex flex-col space-y-2">
-          <div className="flex items-center">
+        <div className="flex flex-col space-y-2.5">
+          <div className="flex items-center justify-between">
             <label className="text-xs font-semibold uppercase tracking-wider text-indigo-400 flex items-center gap-1.5">
               <Glasses className="w-4 h-4" />
-              Meta Camera Profile
+              Meta Camera Hardware Profile
             </label>
+            <span className="text-[11px] text-zinc-500 hidden sm:inline">Emulates authentic lens metadata</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {Object.values(META_PROFILES).map((profile) => (
-              <button
-                key={profile.id}
-                type="button"
-                onClick={() => setSelectedProfile(profile.id)}
-                className={`p-3 rounded-xl text-left transition-all duration-150 border flex items-start justify-between
-                  ${selectedProfile === profile.id 
-                    ? 'bg-indigo-950/30 border-indigo-500 text-white shadow-sm' 
-                    : 'bg-[#1a1a1a] border-[#282828] text-zinc-400 hover:text-zinc-200 hover:bg-[#202020]'}`}
-              >
-                <div>
-                  <div className="text-xs sm:text-sm font-semibold text-white flex items-center gap-1.5">
-                    {profile.name}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            {Object.values(META_PROFILES).map((profile) => {
+              const isSelected = selectedProfile === profile.id;
+              return (
+                <button
+                  key={profile.id}
+                  type="button"
+                  onClick={() => setSelectedProfile(profile.id)}
+                  className={`p-3.5 rounded-xl text-left transition-all duration-200 border flex items-start justify-between relative overflow-hidden active:scale-[0.99]
+                    ${isSelected 
+                      ? 'bg-gradient-to-r from-indigo-950/40 to-purple-950/30 border-indigo-500/80 text-white shadow-lg shadow-indigo-950/40 ring-1 ring-indigo-500/40' 
+                      : 'bg-white/[0.02] border-white/[0.07] text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.05] hover:border-white/[0.12]'}`}
+                >
+                  <div className="pr-2">
+                    <div className="text-xs sm:text-sm font-semibold text-white flex items-center gap-1.5">
+                      {profile.name}
+                    </div>
+                    <div className="text-[11px] text-zinc-400 mt-0.5 line-clamp-1">
+                      {profile.lensModel}
+                    </div>
                   </div>
-                  <div className="text-[11px] text-zinc-400 mt-0.5 line-clamp-1">
-                    {profile.lensModel}
-                  </div>
-                </div>
-                {selectedProfile === profile.id && (
-                  <div className="w-5 h-5 rounded-full bg-indigo-500 text-white flex items-center justify-center shrink-0 mt-0.5">
-                    <Check className="w-3 h-3" />
-                  </div>
-                )}
-              </button>
-            ))}
+                  {isSelected && (
+                    <div className="w-5 h-5 rounded-full bg-indigo-500 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                      <Check className="w-3 h-3 stroke-[2.5]" />
+                    </div>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
 
         {/* Aspect Ratio Presets */}
-        <div className="flex flex-col space-y-2 pt-2 border-t border-[#222]">
+        <div className="flex flex-col space-y-2.5 pt-4 border-t border-white/[0.06]">
           <div className="flex justify-between items-center">
-            <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Crop Presets</label>
-            <span className="text-xs text-zinc-500">3:4 Meta glasses standard</span>
+            <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
+              <SlidersHorizontal className="w-3.5 h-3.5 text-indigo-400" />
+              Framing & Crop Presets
+            </label>
+            <span className="text-[11px] text-indigo-400 font-medium bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20">
+              3:4 Recommended for Stories
+            </span>
           </div>
+
           <div className="grid grid-cols-3 gap-2">
-            {CROP_PRESETS.map((preset) => (
-              <button
-                key={preset.label}
-                type="button"
-                onClick={() => setAspect(preset.value)}
-                className={`py-2 px-1 rounded-xl text-xs sm:text-sm font-medium transition-all duration-150 active:scale-95 text-center
-                  ${aspect === preset.value 
-                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30' 
-                    : 'bg-[#1e1e1e] text-zinc-400 hover:text-zinc-200 hover:bg-[#282828] border border-[#2a2a2a]'}`}
-              >
-                {preset.label}
-              </button>
-            ))}
+            {CROP_PRESETS.map((preset) => {
+              const isSelected = aspect === preset.value;
+              return (
+                <button
+                  key={preset.label}
+                  type="button"
+                  onClick={() => setAspect(preset.value)}
+                  className={`py-2.5 px-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 active:scale-95 text-center flex flex-col items-center justify-center gap-0.5
+                    ${isSelected 
+                      ? 'bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-lg shadow-indigo-600/30 border border-indigo-400/40' 
+                      : 'bg-white/[0.03] text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.06] border border-white/[0.07]'}`}
+                >
+                  <span>{preset.label}</span>
+                  {preset.label.includes('3:4') && (
+                    <span className="text-[9px] uppercase tracking-wider font-semibold opacity-90">Glasses</span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
 
         {/* Zoom & Rotation Controls Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 pt-2 border-t border-[#222]">
-          {/* Zoom */}
-          <div className="flex flex-col space-y-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 pt-4 border-t border-white/[0.06]">
+          {/* Zoom Control */}
+          <div className="flex flex-col space-y-2.5">
             <div className="flex justify-between items-center text-xs sm:text-sm">
-              <label className="font-semibold uppercase tracking-wider text-zinc-400 text-xs">Zoom</label>
-              <span className="text-indigo-400 font-mono font-medium">{zoom.toFixed(1)}x</span>
+              <label className="font-semibold uppercase tracking-wider text-zinc-400 text-xs flex items-center gap-1.5">
+                <ZoomIn className="w-3.5 h-3.5 text-indigo-400" />
+                Zoom
+              </label>
+              <span className="text-indigo-400 font-mono font-semibold bg-indigo-500/10 px-2 py-0.5 rounded-md border border-indigo-500/20 text-xs">
+                {zoom.toFixed(1)}x
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => adjustZoom(-0.2)}
-                className="w-9 h-9 flex items-center justify-center rounded-xl bg-[#1e1e1e] hover:bg-[#282828] text-zinc-300 border border-[#2a2a2a] active:scale-95 shrink-0"
+                className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.03] hover:bg-white/[0.08] text-zinc-300 border border-white/[0.08] active:scale-90 transition-all shrink-0"
                 aria-label="Zoom out"
               >
                 <ZoomOut className="w-4 h-4" />
@@ -176,12 +214,13 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
                 step={0.1}
                 value={zoom}
                 onChange={(e) => setZoom(Number(e.target.value))}
-                className="w-full accent-indigo-500 bg-[#222] rounded-lg h-2 appearance-none cursor-pointer"
+                className="w-full accent-indigo-500 bg-white/[0.08] rounded-lg h-2 appearance-none cursor-pointer"
+                aria-label="Zoom level"
               />
               <button
                 type="button"
                 onClick={() => adjustZoom(0.2)}
-                className="w-9 h-9 flex items-center justify-center rounded-xl bg-[#1e1e1e] hover:bg-[#282828] text-zinc-300 border border-[#2a2a2a] active:scale-95 shrink-0"
+                className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.03] hover:bg-white/[0.08] text-zinc-300 border border-white/[0.08] active:scale-90 transition-all shrink-0"
                 aria-label="Zoom in"
               >
                 <ZoomIn className="w-4 h-4" />
@@ -189,17 +228,22 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
             </div>
           </div>
 
-          {/* Rotate */}
-          <div className="flex flex-col space-y-2">
+          {/* Rotate Control */}
+          <div className="flex flex-col space-y-2.5">
             <div className="flex justify-between items-center text-xs sm:text-sm">
-              <label className="font-semibold uppercase tracking-wider text-zinc-400 text-xs">Rotate</label>
-              <span className="text-zinc-500 font-mono text-xs">{rotation}°</span>
+              <label className="font-semibold uppercase tracking-wider text-zinc-400 text-xs flex items-center gap-1.5">
+                <RotateCw className="w-3.5 h-3.5 text-indigo-400" />
+                Rotate Angle
+              </label>
+              <span className="text-zinc-400 font-mono text-xs bg-white/[0.04] px-2 py-0.5 rounded-md border border-white/[0.06]">
+                {rotation}°
+              </span>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2.5">
               <button 
                 type="button"
                 onClick={() => setRotation(r => r - 90)}
-                className="flex-1 h-9 flex items-center justify-center gap-1.5 rounded-xl bg-[#1e1e1e] hover:bg-[#282828] text-zinc-300 border border-[#2a2a2a] text-xs sm:text-sm font-medium active:scale-95 transition-transform"
+                className="flex-1 h-10 flex items-center justify-center gap-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] text-zinc-300 border border-white/[0.08] text-xs sm:text-sm font-medium active:scale-95 transition-all"
               >
                 <RotateCcw className="w-3.5 h-3.5 text-indigo-400" />
                 -90°
@@ -207,7 +251,7 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
               <button 
                 type="button"
                 onClick={() => setRotation(r => r + 90)}
-                className="flex-1 h-9 flex items-center justify-center gap-1.5 rounded-xl bg-[#1e1e1e] hover:bg-[#282828] text-zinc-300 border border-[#2a2a2a] text-xs sm:text-sm font-medium active:scale-95 transition-transform"
+                className="flex-1 h-10 flex items-center justify-center gap-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] text-zinc-300 border border-white/[0.08] text-xs sm:text-sm font-medium active:scale-95 transition-all"
               >
                 <RotateCw className="w-3.5 h-3.5 text-indigo-400" />
                 +90°
@@ -216,11 +260,15 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
           </div>
         </div>
 
-        {/* Quality Slider */}
-        <div className="flex flex-col space-y-2 pt-2 border-t border-[#222]">
+        {/* Quality Control Slider */}
+        <div className="flex flex-col space-y-2 pt-4 border-t border-white/[0.06]">
           <div className="flex justify-between items-center text-xs sm:text-sm">
-            <label className="font-semibold uppercase tracking-wider text-zinc-400 text-xs">Output Quality</label>
-            <span className="text-indigo-400 font-mono font-medium">{quality}%</span>
+            <label className="font-semibold uppercase tracking-wider text-zinc-400 text-xs">
+              Output JPEG Quality
+            </label>
+            <span className="text-indigo-400 font-mono font-semibold bg-indigo-500/10 px-2 py-0.5 rounded-md border border-indigo-500/20 text-xs">
+              {quality}%
+            </span>
           </div>
           <input
             type="range"
@@ -229,11 +277,12 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
             step={1}
             value={quality}
             onChange={(e) => setQuality(Number(e.target.value))}
-            className="w-full accent-indigo-500 bg-[#222] rounded-lg h-2 appearance-none cursor-pointer"
+            className="w-full accent-indigo-500 bg-white/[0.08] rounded-lg h-2 appearance-none cursor-pointer"
+            aria-label="Output quality"
           />
           <div className="flex justify-between text-[11px] text-zinc-500">
-            <span>Faster file size</span>
-            <span>Ultra HD (Recommended)</span>
+            <span>Faster export</span>
+            <span className="text-indigo-400 font-medium">Ultra HD Clarity (Recommended)</span>
           </div>
         </div>
       </div>
@@ -250,12 +299,12 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
           Back
         </Button>
         <Button 
-          variant="primary" 
+          variant="glow" 
           size="lg" 
           onClick={handleProcess} 
           isLoading={isProcessing}
           icon={<Sparkles className="w-5 h-5" />}
-          className="flex-1 h-12 text-base font-semibold rounded-xl shadow-lg shadow-indigo-600/30 active:scale-[0.98]"
+          className="flex-1 h-12 text-base font-semibold rounded-xl shadow-xl shadow-indigo-600/30"
         >
           Generate Meta Photo
         </Button>
@@ -263,3 +312,5 @@ export function ImageEditor({ imageFile, onProcess, onBack, isProcessing }: Imag
     </div>
   );
 }
+
+export default ImageEditor;

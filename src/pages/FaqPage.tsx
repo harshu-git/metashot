@@ -2,40 +2,43 @@ import { Helmet } from 'react-helmet-async';
 import { Accordion } from '@/components/ui/Accordion';
 import { pageMeta } from '@/seo/metadata';
 import { AdSlot } from '@/components/layout/AdSlot';
+import { Link } from 'react-router';
+import { MessageSquare, ArrowRight, HelpCircle } from 'lucide-react';
+import { Button } from '@/components/ui/Button';
 
 export function FaqPage() {
   const faqItems = [
     {
       question: "What does MetaShot do?",
-      answer: "MetaShot is a browser-based photo processing tool that helps you prepare images for Instagram. It provides crop, resize, rotate, and quality adjustment features, all processed locally on your device."
+      answer: "MetaShot is a browser-based photo processing tool that helps you prepare images for Instagram Stories. It provides 3:4 aspect ratio cropping, resizing, rotation, and JPEG quality adjustment, and injects authentic Ray-Ban Meta hardware EXIF and XMP tags entirely locally on your device."
     },
     {
-      question: "Are my photos uploaded to a server?",
-      answer: "No. MetaShot processes all images directly in your browser. Your photos are never uploaded to our servers. Everything happens locally on your device, ensuring maximum privacy and speed."
+      question: "Are my photos uploaded to any external server?",
+      answer: "No. MetaShot processes all images directly inside your web browser using HTML5 Canvas and client-side binary EXIF manipulation. Your photos are never uploaded, logged, or transmitted over the network."
     },
     {
-      question: "Does this work with Instagram?",
-      answer: "MetaShot processes your photos and prepares them for sharing. However, Instagram's features and behavior can change, and specific platform features are not guaranteed by MetaShot. We simply provide tools to format your images effectively."
+      question: "How does Instagram detect the photo as Ray-Ban Meta?",
+      answer: "MetaShot embeds the exact EXIF and XMP metadata structure created by Ray-Ban Meta smart glasses (including camera make 'Meta AI', model 'Ray-Ban Meta Smart Glasses 2', lens specs, and SpinView tags). When shared directly to Instagram Stories on mobile, Instagram recognizes these native metadata identifiers."
     },
     {
-      question: "Do I need an account?",
-      answer: "No. MetaShot is completely free to use and does not require any account or registration. Just open the website and start editing."
+      question: "Do I need to install an app or create an account?",
+      answer: "No. MetaShot is 100% web-based and runs in modern browsers on Android, iOS, Windows, and macOS. No account registration, password, or subscription is required."
     },
     {
       question: "Does MetaShot belong to Ray-Ban or Meta?",
-      answer: "No. MetaShot is an independent third-party project and is not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc., Ray-Ban, or Instagram."
+      answer: "No. MetaShot is an independent third-party project created by Harsh Shrimali and is not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc., Ray-Ban, EssilorLuxottica, or Instagram."
     },
     {
-      question: "What image formats are supported?",
-      answer: "We currently support standard web image formats including JPG, PNG, WEBP, and HEIC (on compatible devices). Your processed images can be exported as JPG, PNG, or WEBP."
+      question: "What image formats can I upload?",
+      answer: "We support standard photo formats including JPG, PNG, WEBP, and Apple HEIC (from iPhones and iPads). All outputs are exported as high-resolution JPEGs with complete Meta camera metadata."
     },
     {
-      question: "Is MetaShot free?",
-      answer: "Yes, MetaShot is completely free to use. The website is supported by advertisements to cover hosting and development costs."
+      question: "Is MetaShot completely free to use?",
+      answer: "Yes, MetaShot is free to use without restrictions. The project is sustained through non-intrusive advertisements that help cover hosting and domain maintenance costs."
     },
     {
-      question: "What happens to my photos after processing?",
-      answer: "Nothing. Your photos are processed in your browser and are never stored on any server. Once you close the page or refresh, the processed images are no longer available unless you explicitly downloaded them."
+      question: "What happens to my images after I close the page?",
+      answer: "Once you close the browser tab or refresh, all image data in browser memory is immediately discarded. Nothing is retained."
     }
   ];
 
@@ -62,29 +65,51 @@ export function FaqPage() {
         </script>
       </Helmet>
 
-      <div className="w-full max-w-3xl mx-auto py-12 sm:py-16 px-4 sm:px-6">
-        <div className="text-center mb-10">
-          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight">Frequently Asked Questions</h1>
-          <p className="text-zinc-400 text-sm sm:text-base">
-            Find answers to common questions about MetaShot and how it works.
+      <div className="relative w-full max-w-4xl mx-auto py-12 sm:py-20 px-4 sm:px-6 overflow-hidden">
+        {/* Ambient Glow */}
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none -z-10" />
+
+        {/* Header */}
+        <div className="text-center mb-12 sm:mb-16 max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-4">
+            <HelpCircle className="w-3.5 h-3.5" />
+            <span>Support & Documentation</span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
+            Frequently Asked Questions
+          </h1>
+          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+            Everything you need to know about MetaShot, image privacy, Instagram compatibility, and metadata processing.
           </p>
         </div>
 
         {/* Ad Slot 1 */}
-        <AdSlot slot="faq-ad-1" size="md" className="mb-8" />
+        <AdSlot slot="faq-ad-1" size="md" className="mb-10" />
         
-        <Accordion items={faqItems} />
+        {/* Accordion Component */}
+        <div className="max-w-3xl mx-auto">
+          <Accordion items={faqItems} />
+        </div>
         
-        <div className="mt-12 p-6 bg-[#141414] rounded-2xl border border-[#242424] text-center">
-          <h2 className="text-xl font-semibold text-white mb-2">Still have questions?</h2>
-          <p className="text-zinc-400 text-sm mb-4">We're here to help you get the most out of our tools.</p>
-          <a href="/contact" className="inline-flex items-center justify-center rounded-xl font-medium transition-all duration-200 bg-[#222] hover:bg-[#2a2a2a] text-white border border-[#333] px-5 py-2.5 text-sm">
-            Contact Us
-          </a>
+        {/* Still Have Questions CTA Card */}
+        <div className="mt-16 max-w-3xl mx-auto p-8 rounded-3xl glass-panel border border-white/[0.08] text-center shadow-2xl relative overflow-hidden">
+          <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mx-auto mb-4">
+            <MessageSquare className="w-6 h-6" />
+          </div>
+          <h2 className="text-xl font-bold text-white mb-2">Have a question or feedback?</h2>
+          <p className="text-zinc-400 text-sm max-w-md mx-auto mb-6">
+            We are continuously improving MetaShot. Get in touch with us directly and we'll reply promptly.
+          </p>
+          <Link to="/contact">
+            <Button variant="secondary" size="md" className="rounded-xl px-6 h-11 text-zinc-200">
+              <span>Contact Us</span>
+              <ArrowRight className="w-4 h-4 ml-1.5" />
+            </Button>
+          </Link>
         </div>
 
         {/* Ad Slot 2 */}
-        <div className="mt-12">
+        <div className="mt-14">
           <AdSlot slot="faq-ad-2" size="banner" />
         </div>
       </div>
