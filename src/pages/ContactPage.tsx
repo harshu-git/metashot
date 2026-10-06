@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Mail, MessageSquare, Copy, Check, Clock, Send } from 'lucide-react';
 import { pageMeta } from '@/seo/metadata';
 import { AdSlot } from '@/components/layout/AdSlot';
+import { TiltCard } from '@/components/ui/TiltCard';
 
 export function ContactPage() {
   const [copied, setCopied] = useState(false);
@@ -43,58 +44,62 @@ export function ContactPage() {
         <AdSlot slot="contact-ad-1" size="md" className="mb-12" />
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 max-w-3xl mx-auto">
-          {/* Email Support Card with One-Tap Copy */}
-          <div className="glass-panel-interactive rounded-3xl border border-white/[0.1] p-7 sm:p-8 flex flex-col items-center text-center shadow-xl backdrop-blur-2xl relative group">
-            <div className="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-5 group-hover:scale-110 transition-transform">
-              <Mail className="w-7 h-7" />
-            </div>
-            <h2 className="text-xl font-bold text-white mb-2">Direct Email</h2>
-            <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
-              For bug reports, technical inquiries, and general questions.
-            </p>
+          {/* Email Support Card with 3D Tilt */}
+          <TiltCard className="rounded-3xl h-full" tiltMaxAngle={7} glareOpacity={0.12}>
+            <div className="glass-panel-interactive rounded-3xl border border-white/[0.1] p-7 sm:p-8 flex flex-col items-center text-center shadow-xl backdrop-blur-2xl relative group h-full">
+              <div className="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-5 group-hover:scale-110 transition-transform">
+                <Mail className="w-7 h-7" />
+              </div>
+              <h2 className="text-xl font-bold text-white mb-2">Direct Email</h2>
+              <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
+                For bug reports, technical inquiries, and general questions.
+              </p>
 
-            <div className="w-full flex items-center gap-2 glass-pill p-2 rounded-2xl border border-white/[0.08]">
-              <a 
-                href={`mailto:${email}`} 
-                className="flex-1 truncate text-xs sm:text-sm font-mono text-indigo-400 hover:text-indigo-300 font-semibold text-left px-2"
+              <div className="w-full flex items-center gap-2 glass-pill p-2 rounded-2xl border border-white/[0.08]">
+                <a 
+                  href={`mailto:${email}`} 
+                  className="flex-1 truncate text-xs sm:text-sm font-mono text-indigo-400 hover:text-indigo-300 font-semibold text-left px-2"
+                >
+                  {email}
+                </a>
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className="p-2 rounded-xl bg-white/[0.08] hover:bg-white/[0.16] text-zinc-300 hover:text-white transition-all active:scale-95 shrink-0 border border-white/[0.08]"
+                  title="Copy email to clipboard"
+                  aria-label="Copy email address"
+                >
+                  {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                </button>
+              </div>
+              {copied && (
+                <span className="text-xs text-emerald-400 font-medium mt-2 animate-in fade-in">
+                  Copied to clipboard!
+                </span>
+              )}
+            </div>
+          </TiltCard>
+
+          {/* Feedback & Feature Requests Card with 3D Tilt */}
+          <TiltCard className="rounded-3xl h-full" tiltMaxAngle={7} glareOpacity={0.12}>
+            <div className="glass-panel-interactive rounded-3xl border border-white/[0.1] p-7 sm:p-8 flex flex-col items-center text-center shadow-xl backdrop-blur-2xl relative group h-full">
+              <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-5 group-hover:scale-110 transition-transform">
+                <MessageSquare className="w-7 h-7" />
+              </div>
+              <h2 className="text-xl font-bold text-white mb-2">Feedback & Ideas</h2>
+              <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
+                Want a new camera preset, format, or feature added to MetaShot?
+              </p>
+              
+              <a
+                href={`mailto:${email}?subject=MetaShot%20Feature%20Suggestion`}
+                className="w-full flex items-center justify-center gap-2 h-11 rounded-2xl glass-pill hover:bg-white/[0.1] text-white border border-white/[0.12] text-sm font-semibold transition-all active:scale-[0.98]"
               >
-                {email}
+                <Send className="w-4 h-4 text-purple-400" />
+                <span>Send Feature Idea</span>
               </a>
-              <button
-                type="button"
-                onClick={handleCopy}
-                className="p-2 rounded-xl bg-white/[0.08] hover:bg-white/[0.16] text-zinc-300 hover:text-white transition-all active:scale-95 shrink-0 border border-white/[0.08]"
-                title="Copy email to clipboard"
-                aria-label="Copy email address"
-              >
-                {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-              </button>
             </div>
-            {copied && (
-              <span className="text-xs text-emerald-400 font-medium mt-2 animate-in fade-in">
-                Copied to clipboard!
-              </span>
-            )}
-          </div>
-
-          {/* Feedback & Feature Requests Card */}
-          <div className="glass-panel-interactive rounded-3xl border border-white/[0.1] p-7 sm:p-8 flex flex-col items-center text-center shadow-xl backdrop-blur-2xl relative group">
-            <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-5 group-hover:scale-110 transition-transform">
-              <MessageSquare className="w-7 h-7" />
-            </div>
-            <h2 className="text-xl font-bold text-white mb-2">Feedback & Ideas</h2>
-            <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
-              Want a new camera preset, format, or feature added to MetaShot?
-            </p>
-            
-            <a
-              href={`mailto:${email}?subject=MetaShot%20Feature%20Suggestion`}
-              className="w-full flex items-center justify-center gap-2 h-11 rounded-2xl glass-pill hover:bg-white/[0.1] text-white border border-white/[0.12] text-sm font-semibold transition-all active:scale-[0.98]"
-            >
-              <Send className="w-4 h-4 text-purple-400" />
-              <span>Send Feature Idea</span>
-            </a>
-          </div>
+          </TiltCard>
         </div>
 
         {/* SLA / Notice Banner */}

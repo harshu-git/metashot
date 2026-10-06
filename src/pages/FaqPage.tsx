@@ -5,6 +5,7 @@ import { AdSlot } from '@/components/layout/AdSlot';
 import { Link } from 'react-router';
 import { MessageSquare, ArrowRight, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { TiltCard } from '@/components/ui/TiltCard';
 
 export function FaqPage() {
   const faqItems = [
@@ -91,22 +92,24 @@ export function FaqPage() {
           <Accordion items={faqItems} />
         </div>
         
-        {/* Still Have Questions CTA Card */}
-        <div className="mt-16 max-w-3xl mx-auto p-8 rounded-3xl glass-panel border border-white/[0.1] text-center shadow-2xl relative overflow-hidden backdrop-blur-2xl">
-          <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mx-auto mb-4">
-            <MessageSquare className="w-6 h-6" />
+        {/* Still Have Questions CTA Card with 3D Tilt */}
+        <TiltCard className="mt-16 max-w-3xl mx-auto rounded-3xl" tiltMaxAngle={6} glareOpacity={0.12}>
+          <div className="p-8 rounded-3xl glass-panel border border-white/[0.1] text-center shadow-2xl relative overflow-hidden backdrop-blur-2xl">
+            <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mx-auto mb-4">
+              <MessageSquare className="w-6 h-6" />
+            </div>
+            <h2 className="text-xl font-bold text-white mb-2">Have a question or feedback?</h2>
+            <p className="text-zinc-400 text-sm max-w-md mx-auto mb-6">
+              We are continuously improving MetaShot. Get in touch with us directly and we'll reply promptly.
+            </p>
+            <Link to="/contact">
+              <Button variant="secondary" size="md" className="rounded-xl px-6 h-11 text-zinc-200">
+                <span>Contact Us</span>
+                <ArrowRight className="w-4 h-4 ml-1.5" />
+              </Button>
+            </Link>
           </div>
-          <h2 className="text-xl font-bold text-white mb-2">Have a question or feedback?</h2>
-          <p className="text-zinc-400 text-sm max-w-md mx-auto mb-6">
-            We are continuously improving MetaShot. Get in touch with us directly and we'll reply promptly.
-          </p>
-          <Link to="/contact">
-            <Button variant="secondary" size="md" className="rounded-xl px-6 h-11 text-zinc-200">
-              <span>Contact Us</span>
-              <ArrowRight className="w-4 h-4 ml-1.5" />
-            </Button>
-          </Link>
-        </div>
+        </TiltCard>
 
         {/* Ad Slot 2 */}
         <div className="mt-14">

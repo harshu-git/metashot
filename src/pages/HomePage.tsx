@@ -4,8 +4,8 @@ import { Upload, Shield, Monitor, Lock, Crop, Download, Zap, Smartphone, Image a
 import { Button } from '@/components/ui/Button';
 import { Accordion } from '@/components/ui/Accordion';
 import { AdSlot } from '@/components/layout/AdSlot';
-import { MetaGlassesHero3D } from '@/components/3d/MetaGlassesHero3D';
 import { TiltCard } from '@/components/ui/TiltCard';
+import { HeroMotionShowcase } from '@/components/3d/HeroMotionShowcase';
 import { pageMeta } from '@/seo/metadata';
 
 export function HomePage() {
@@ -117,10 +117,8 @@ export function HomePage() {
             </div>
           </div>
 
-          {/* Interactive 3D Ray-Ban Meta Glasses Hardware Viewport */}
-          <div className="w-full mt-10">
-            <MetaGlassesHero3D />
-          </div>
+          {/* Interactive 3D Camera Transformation Stage */}
+          <HeroMotionShowcase />
         </div>
       </section>
 

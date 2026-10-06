@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { pageMeta } from '@/seo/metadata';
 import { AdSlot } from '@/components/layout/AdSlot';
 import { Button } from '@/components/ui/Button';
+import { TiltCard } from '@/components/ui/TiltCard';
 
 export function HowItWorksPage() {
   const steps = [
@@ -89,44 +90,52 @@ export function HowItWorksPage() {
                   {step.num}
                 </div>
 
-                {/* Content Card */}
-                <div className={`w-[calc(100%-3.5rem)] md:w-[calc(50%-2.5rem)] glass-panel-interactive rounded-3xl p-6 sm:p-7 border border-white/[0.1] ${
-                  isEven ? 'md:mr-auto' : 'md:ml-auto'
-                }`}>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className={`p-2.5 rounded-xl border ${step.accent}`}>
-                      <Icon className="w-5 h-5" />
+                {/* Content Card with 3D Tilt */}
+                <TiltCard 
+                  className={`w-[calc(100%-3.5rem)] md:w-[calc(50%-2.5rem)] rounded-3xl ${
+                    isEven ? 'md:mr-auto' : 'md:ml-auto'
+                  }`}
+                  tiltMaxAngle={7}
+                  glareOpacity={0.12}
+                >
+                  <div className="glass-panel-interactive rounded-3xl p-6 sm:p-7 border border-white/[0.1] h-full">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`p-2.5 rounded-xl border ${step.accent}`}>
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block font-semibold">Step {step.num}</span>
+                        <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight">{step.title}</h2>
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block font-semibold">Step {step.num}</span>
-                      <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight">{step.title}</h2>
-                    </div>
+                    <p className="text-zinc-400 text-sm leading-relaxed">
+                      {step.desc}
+                    </p>
                   </div>
-                  <p className="text-zinc-400 text-sm leading-relaxed">
-                    {step.desc}
-                  </p>
-                </div>
+                </TiltCard>
               </div>
             );
           })}
         </div>
 
-        {/* 100% On-Device Privacy Guarantee Callout */}
-        <div className="mt-20 p-8 sm:p-10 rounded-3xl glass-panel border border-emerald-500/35 bg-emerald-950/20 text-center relative overflow-hidden shadow-2xl backdrop-blur-2xl">
-          <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mx-auto mb-4">
-            <ShieldCheck className="w-7 h-7" />
+        {/* 100% On-Device Privacy Guarantee Callout with 3D Tilt */}
+        <TiltCard className="mt-20 rounded-3xl" tiltMaxAngle={5} glareOpacity={0.1}>
+          <div className="p-8 sm:p-10 rounded-3xl glass-panel border border-emerald-500/35 bg-emerald-950/20 text-center relative overflow-hidden shadow-2xl backdrop-blur-2xl">
+            <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mx-auto mb-4">
+              <ShieldCheck className="w-7 h-7" />
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-2">100% In-Browser Guarantee</h2>
+            <p className="text-zinc-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-6">
+              Unlike remote file converters, MetaShot executes entirely inside your device's browser memory. Your personal photos are never transferred, processed, or stored on external servers.
+            </p>
+            <Link to="/converter">
+              <Button variant="glow" size="lg" className="rounded-2xl h-12 px-7">
+                <span>Try MetaShot Now</span>
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">100% In-Browser Guarantee</h2>
-          <p className="text-zinc-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-6">
-            Unlike remote file converters, MetaShot executes entirely inside your device's browser memory. Your personal photos are never transferred, processed, or stored on external servers.
-          </p>
-          <Link to="/converter">
-            <Button variant="glow" size="lg" className="rounded-2xl h-12 px-7">
-              <span>Try MetaShot Now</span>
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-          </Link>
-        </div>
+        </TiltCard>
         
         {/* Ad Slot 2 */}
         <div className="mt-14">

@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router';
 import Lenis from 'lenis';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { SpatialMotionCanvas } from '@/components/3d/SpatialMotionCanvas';
 import { initAnalytics, trackEvent } from '@/services/analytics';
 
 // Lazy-load pages for better initial load performance
@@ -90,6 +91,7 @@ function App() {
       <div className="fixed top-[35%] right-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full bg-purple-600/10 blur-[150px] pointer-events-none -z-10 animate-float-2" />
       <div className="fixed bottom-[-10%] left-[15%] w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] rounded-full bg-pink-600/8 blur-[160px] pointer-events-none -z-10 animate-float-1" />
       <div className="fixed inset-0 bg-radial-mesh opacity-40 pointer-events-none -z-10" />
+      <SpatialMotionCanvas />
 
       <ScrollToTop lenisRef={lenisRef} />
       <Header />
