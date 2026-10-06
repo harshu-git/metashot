@@ -4,6 +4,8 @@ import { Upload, Shield, Monitor, Lock, Crop, Download, Zap, Smartphone, Image a
 import { Button } from '@/components/ui/Button';
 import { Accordion } from '@/components/ui/Accordion';
 import { AdSlot } from '@/components/layout/AdSlot';
+import { MetaGlassesHero3D } from '@/components/3d/MetaGlassesHero3D';
+import { TiltCard } from '@/components/ui/TiltCard';
 import { pageMeta } from '@/seo/metadata';
 
 export function HomePage() {
@@ -114,6 +116,11 @@ export function HomePage() {
               <span>Zero server uploads</span>
             </div>
           </div>
+
+          {/* Interactive 3D Ray-Ban Meta Glasses Hardware Viewport */}
+          <div className="w-full mt-10">
+            <MetaGlassesHero3D />
+          </div>
         </div>
       </section>
 
@@ -122,7 +129,7 @@ export function HomePage() {
         <AdSlot slot="home-ad-1" size="md" />
       </div>
 
-      {/* How It Works - Inspira Interactive Cards */}
+      {/* How It Works - Inspira Interactive Cards with 3D Tilt */}
       <section className="py-16 sm:py-20 px-4 w-full">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-xl mx-auto mb-14">
@@ -139,45 +146,51 @@ export function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {/* Step 1 */}
-            <div className="glass-panel-interactive rounded-3xl p-7 flex flex-col items-start relative overflow-hidden group">
-              <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-6 group-hover:scale-110 transition-transform">
-                <Upload className="w-6 h-6" />
+            <TiltCard className="rounded-3xl h-full" tiltMaxAngle={8} glareOpacity={0.12}>
+              <div className="glass-panel-interactive rounded-3xl p-7 flex flex-col items-start relative overflow-hidden group h-full">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-6 group-hover:scale-110 transition-transform">
+                  <Upload className="w-6 h-6" />
+                </div>
+                <span className="text-xs font-mono text-indigo-400 uppercase tracking-widest font-semibold mb-2">Step 01</span>
+                <h3 className="text-xl font-bold text-white mb-2">Select Your Photo</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">
+                  Choose any photo from your phone gallery or desktop. Supports JPG, PNG, WEBP, and Apple HEIC formats.
+                </p>
               </div>
-              <span className="text-xs font-mono text-indigo-400 uppercase tracking-widest font-semibold mb-2">Step 01</span>
-              <h3 className="text-xl font-bold text-white mb-2">Select Your Photo</h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Choose any photo from your phone gallery or desktop. Supports JPG, PNG, WEBP, and Apple HEIC formats.
-              </p>
-            </div>
+            </TiltCard>
 
             {/* Step 2 */}
-            <div className="glass-panel-interactive rounded-3xl p-7 flex flex-col items-start relative overflow-hidden group">
-              <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-6 group-hover:scale-110 transition-transform">
-                <Crop className="w-6 h-6" />
+            <TiltCard className="rounded-3xl h-full" tiltMaxAngle={8} glareOpacity={0.12}>
+              <div className="glass-panel-interactive rounded-3xl p-7 flex flex-col items-start relative overflow-hidden group h-full">
+                <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-6 group-hover:scale-110 transition-transform">
+                  <Crop className="w-6 h-6" />
+                </div>
+                <span className="text-xs font-mono text-purple-400 uppercase tracking-widest font-semibold mb-2">Step 02</span>
+                <h3 className="text-xl font-bold text-white mb-2">Adjust Framing</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">
+                  Use the 3:4 Ray-Ban Meta preset, zoom in on your subject, and rotate as desired with touch-friendly sliders.
+                </p>
               </div>
-              <span className="text-xs font-mono text-purple-400 uppercase tracking-widest font-semibold mb-2">Step 02</span>
-              <h3 className="text-xl font-bold text-white mb-2">Adjust Framing</h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Use the 3:4 Ray-Ban Meta preset, zoom in on your subject, and rotate as desired with touch-friendly sliders.
-              </p>
-            </div>
+            </TiltCard>
 
             {/* Step 3 */}
-            <div className="glass-panel-interactive rounded-3xl p-7 flex flex-col items-start relative overflow-hidden group">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-6 group-hover:scale-110 transition-transform">
-                <Download className="w-6 h-6" />
+            <TiltCard className="rounded-3xl h-full" tiltMaxAngle={8} glareOpacity={0.12}>
+              <div className="glass-panel-interactive rounded-3xl p-7 flex flex-col items-start relative overflow-hidden group h-full">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-6 group-hover:scale-110 transition-transform">
+                  <Download className="w-6 h-6" />
+                </div>
+                <span className="text-xs font-mono text-emerald-400 uppercase tracking-widest font-semibold mb-2">Step 03</span>
+                <h3 className="text-xl font-bold text-white mb-2">Share to Stories</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">
+                  Post directly to Instagram Stories with 1 tap or save the full-resolution file with verified Meta camera tags.
+                </p>
               </div>
-              <span className="text-xs font-mono text-emerald-400 uppercase tracking-widest font-semibold mb-2">Step 03</span>
-              <h3 className="text-xl font-bold text-white mb-2">Share to Stories</h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Post directly to Instagram Stories with 1 tap or save the full-resolution file with verified Meta camera tags.
-              </p>
-            </div>
+            </TiltCard>
           </div>
         </div>
       </section>
 
-      {/* Features Grid - Inspira Ambient Glass */}
+      {/* Features Grid - Inspira Ambient Glass with 3D Tilt */}
       <section className="py-16 sm:py-20 px-4 w-full bg-[#070709]/60">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-xl mx-auto mb-14">
@@ -190,53 +203,61 @@ export function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="glass-panel-interactive rounded-3xl p-7 flex gap-5 border border-white/[0.09]">
-              <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0">
-                <Zap className="w-6 h-6" />
+            <TiltCard className="rounded-3xl h-full" tiltMaxAngle={6} glareOpacity={0.1}>
+              <div className="glass-panel-interactive rounded-3xl p-7 flex gap-5 border border-white/[0.09] h-full">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0">
+                  <Zap className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-white mb-2">Instant In-Browser Processing</h3>
+                  <p className="text-zinc-400 text-sm leading-relaxed">
+                    Metadata injection and canvas rendering execute directly in your browser with zero latency or upload wait times.
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-bold text-white mb-2">Instant In-Browser Processing</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed">
-                  Metadata injection and canvas rendering execute directly in your browser with zero latency or upload wait times.
-                </p>
-              </div>
-            </div>
+            </TiltCard>
             
-            <div className="glass-panel-interactive rounded-3xl p-7 flex gap-5 border border-white/[0.09]">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
-                <Shield className="w-6 h-6" />
+            <TiltCard className="rounded-3xl h-full" tiltMaxAngle={6} glareOpacity={0.1}>
+              <div className="glass-panel-interactive rounded-3xl p-7 flex gap-5 border border-white/[0.09] h-full">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+                  <Shield className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-white mb-2">Complete Privacy Guarantee</h3>
+                  <p className="text-zinc-400 text-sm leading-relaxed">
+                    Your photos are never stored, logged, or sent across the network. All pixels and EXIF bytes remain on your device.
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-bold text-white mb-2">Complete Privacy Guarantee</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed">
-                  Your photos are never stored, logged, or sent across the network. All pixels and EXIF bytes remain on your device.
-                </p>
-              </div>
-            </div>
+            </TiltCard>
 
-            <div className="glass-panel-interactive rounded-3xl p-7 flex gap-5 border border-white/[0.09]">
-              <div className="w-12 h-12 rounded-2xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 shrink-0">
-                <Smartphone className="w-6 h-6" />
+            <TiltCard className="rounded-3xl h-full" tiltMaxAngle={6} glareOpacity={0.1}>
+              <div className="glass-panel-interactive rounded-3xl p-7 flex gap-5 border border-white/[0.09] h-full">
+                <div className="w-12 h-12 rounded-2xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 shrink-0">
+                  <Smartphone className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-white mb-2">Engineered for Mobile</h3>
+                  <p className="text-zinc-400 text-sm leading-relaxed">
+                    Seamlessly integrates with iOS Safari and Android Chrome native Web Share sheets for 1-tap Instagram Stories posting.
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-bold text-white mb-2">Engineered for Mobile</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed">
-                  Seamlessly integrates with iOS Safari and Android Chrome native Web Share sheets for 1-tap Instagram Stories posting.
-                </p>
-              </div>
-            </div>
+            </TiltCard>
 
-            <div className="glass-panel-interactive rounded-3xl p-7 flex gap-5 border border-white/[0.09]">
-              <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 shrink-0">
-                <ImageIcon className="w-6 h-6" />
+            <TiltCard className="rounded-3xl h-full" tiltMaxAngle={6} glareOpacity={0.1}>
+              <div className="glass-panel-interactive rounded-3xl p-7 flex gap-5 border border-white/[0.09] h-full">
+                <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 shrink-0">
+                  <ImageIcon className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-white mb-2">Native 12MP Ultra-Sharp Export</h3>
+                  <p className="text-zinc-400 text-sm leading-relaxed">
+                    Export at 3024 × 4032 native Ray-Ban Meta resolution with customizable JPEG compression quality up to 100%.
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-bold text-white mb-2">Native 12MP Ultra-Sharp Export</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed">
-                  Export at 3024 × 4032 native Ray-Ban Meta resolution with customizable JPEG compression quality up to 100%.
-                </p>
-              </div>
-            </div>
+            </TiltCard>
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Download, Plus, Share2, Check, Glasses, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
 import type { ProcessedImage } from '../../types';
 import { Button } from '../ui/Button';
+import { TiltCard } from '../ui/TiltCard';
 
 interface ResultViewProps {
   processedImage: ProcessedImage;
@@ -64,16 +65,18 @@ export function ResultView({ processedImage, onCreateAnother }: ResultViewProps)
         </p>
       </div>
       
-      {/* Framed Image Preview */}
-      <div className="w-full max-w-xl glass-panel p-3.5 sm:p-5 rounded-3xl border border-white/[0.12] shadow-2xl relative overflow-hidden group">
-        <div className="relative overflow-hidden rounded-2xl bg-[#070709]">
-          <img 
-            src={processedImage.url} 
-            alt="Processed result with Meta EXIF tags" 
-            className="w-full max-h-[380px] sm:max-h-[460px] object-contain rounded-2xl mx-auto"
-          />
+      {/* Framed Image Preview with 3D Spatial Tilt */}
+      <TiltCard className="w-full max-w-xl rounded-3xl" tiltMaxAngle={7} glareOpacity={0.15}>
+        <div className="w-full glass-panel p-3.5 sm:p-5 rounded-3xl border border-white/[0.12] shadow-2xl relative overflow-hidden group">
+          <div className="relative overflow-hidden rounded-2xl bg-[#070709]">
+            <img 
+              src={processedImage.url} 
+              alt="Processed result with Meta EXIF tags" 
+              className="w-full max-h-[380px] sm:max-h-[460px] object-contain rounded-2xl mx-auto"
+            />
+          </div>
         </div>
-      </div>
+      </TiltCard>
 
       {/* Direct Story Action Callout Card */}
       <div className="w-full max-w-xl glass-panel relative rounded-3xl p-6 sm:p-7 border border-pink-500/40 bg-gradient-to-br from-pink-950/35 via-purple-950/25 to-[#070709]/70 shadow-2xl text-center space-y-4 overflow-hidden backdrop-blur-2xl">
